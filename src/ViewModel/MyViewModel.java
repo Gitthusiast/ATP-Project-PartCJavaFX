@@ -1,23 +1,28 @@
 package ViewModel;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Model.IModel;
 
-public class MyViewModel extends Application {
+import java.util.Observable;
+import java.util.Observer;
 
+public class MyViewModel extends Observable implements Observer {
+
+    IModel model;
+
+    /**
+     * This method is called whenever the observed object is changed. An
+     * application calls an <tt>Observable</tt> object's
+     * <code>notifyObservers</code> method to have all the object's
+     * observers notified of the change.
+     *
+     * @param o   the observable object.
+     * @param arg an argument passed to the <code>notifyObservers</code>
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../View/MyView.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-    }
+    public void update(Observable o, Object arg) {
+        if(o == model){
 
+        }
 
-    public static void main(String[] args) {
-        launch(args);
     }
 }

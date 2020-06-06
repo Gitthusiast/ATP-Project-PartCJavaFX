@@ -1,4 +1,11 @@
 package Model;
 
-public class MyModel implements IModel {
+import java.util.Observable;
+
+public class MyModel extends Observable implements IModel{
+
+
+
+
+
 }
