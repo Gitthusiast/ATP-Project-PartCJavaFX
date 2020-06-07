@@ -42,13 +42,11 @@ public class MyViewController implements IView, Observer {
 
     public void Instruction(ActionEvent actionEvent) {
         try {
-            Stage stage = new Stage();
-            stage.setTitle("AboutController");
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("Instruction   .fxml").openStream());
-            Scene scene = new Scene(root, 400, 350);
+            Parent root = fxmlLoader.load(getClass().getResource("Instructions.fxml").openStream());
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             stage.show();
         } catch (Exception e) {
 
@@ -58,17 +56,32 @@ public class MyViewController implements IView, Observer {
     public void Play(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setTitle("AboutController");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("Play.fxml").openStream());
-            Scene scene = new Scene(root, stage.getWidth(), stage.getMinHeight());
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*public void goToMenu(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("MyView.fxml").openStream());
+            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
 
         }
-    }
+    }*/
+
+
+
+
 
 
 }
