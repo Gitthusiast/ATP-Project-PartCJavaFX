@@ -42,10 +42,10 @@ public class MyViewController implements IView, Observer {
 
     public void Instruction(ActionEvent actionEvent) {
         try {
-            Stage stage = new Stage();
-            stage.setTitle("AboutController");
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setTitle("Instructions");
             FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("Instruction   .fxml").openStream());
+            Parent root = fxmlLoader.load(getClass().getResource("Instructions.fxml").openStream());
             Scene scene = new Scene(root, 400, 350);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
