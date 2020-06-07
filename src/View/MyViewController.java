@@ -1,8 +1,16 @@
 package View;
 
 import ViewModel.MyViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.Console;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,4 +39,36 @@ public class MyViewController implements IView, Observer {
 
         }
     }
+
+    public void Instruction(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("AboutController");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("Instruction   .fxml").openStream());
+            Scene scene = new Scene(root, 400, 350);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void Play(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setTitle("AboutController");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("Play.fxml").openStream());
+            Scene scene = new Scene(root, stage.getWidth(), stage.getMinHeight());
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        } catch (Exception e) {
+
+        }
+    }
+
+
 }

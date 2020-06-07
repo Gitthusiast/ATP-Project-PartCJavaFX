@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:controller="View.MyViewController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -26,16 +27,8 @@
                     <MenuItem mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="About">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help" />
+                  <Menu mnemonicParsing="false" text="About" />
               </menus>
             </MenuBar>
          </children>
@@ -44,9 +37,12 @@
    <center>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="83.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button minHeight="30.0" minWidth="80.0" mnemonicParsing="false" text="Play" />
-            <Button minHeight="30.0" minWidth="80.0" mnemonicParsing="false" text="Instructions" />
+            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#Play" text="Play" />
+            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#Instruction" text="Instructions" />
          </children>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
       </VBox>
    </center>
 </BorderPane>
