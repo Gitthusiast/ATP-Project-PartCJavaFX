@@ -1,0 +1,12 @@
+/*
+Crimson #BA0B0D
+Dark Red #93090A
+Antique White #FADDDD
+Pale Violet Red #DE9291
+Indian Red #D3686A
+ */
+
+.root{
+
+    -fx-background-color: radial-gradient(radius 0, #BA0B0D, #D3686A);
+}

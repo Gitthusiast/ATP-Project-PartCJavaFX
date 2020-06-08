@@ -43,11 +43,7 @@
          <items>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-<<<<<<< HEAD
                   <Image url="@/arrows.png" />
-=======
-                  <Image url="@../../resources/Images/wall1.jpg" />
->>>>>>> f9994201a5514c7ce7f8a8674c1aab5c0713541d
                </image>
             </ImageView>
             <Label contentDisplay="TEXT_ONLY" prefHeight="216.0" prefWidth="260.0" text="Hello young virus, welcome to the real world. Your big brother' Covid19 is enslaving the whole world. In order to become as great as him you shoud train. You need to find your way out of the maze, your score will be saved, once you are ready YOU WILL ENSLVE THE WORLD. But first focus on reaching to the red cell, use your numpad to move within the maze. Click Play, then generate to start the game. If you give up you can see the answer by pressing the solve button. GOOD LUCK AND MAY THE INFECTION RATES BE WITH YOU." wrapText="true" />
