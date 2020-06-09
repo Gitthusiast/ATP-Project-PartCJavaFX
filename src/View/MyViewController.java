@@ -43,9 +43,11 @@ public class MyViewController implements IView, Observer {
     public void Instruction(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("Instructions.fxml").openStream());
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
+            
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
