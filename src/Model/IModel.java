@@ -41,10 +41,9 @@ public interface IModel {
      */
     public int[] getGoalPosition();
 
-
     /**
      * Move the character according to KeyCode input.
-     * @param step movement dire
+     * @param step movement direction
      */
     public void moveCharacter(KeyCode step);
 }

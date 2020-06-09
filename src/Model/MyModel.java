@@ -13,6 +13,7 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.ISearchingAlgorithm;
 import algorithms.search.Solution;
+import javafx.scene.input.KeyCode;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -30,6 +31,9 @@ public class MyModel extends Observable implements IModel{
     private Server MazeGeneratorServer;
     private Server MazeSolverServer;
     private int[][] solutionArray;
+
+    private int characterRow;
+    private int characterColumn;
 
     public MyModel() {
 
@@ -79,6 +83,9 @@ public class MyModel extends Observable implements IModel{
                         byte[] decompressedMaze = new byte[row*column + 50 /* assuming max maze size 1000x1000 */]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         maze = new Maze(decompressedMaze);
+
+                        characterRow = maze.getStartPosition().getRowIndex();
+                        characterColumn = maze.getStartPosition().getColumnIndex();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -165,6 +172,7 @@ public class MyModel extends Observable implements IModel{
         return position;
     }
 
+
     /**
      * Returns the goal position of the maze as an int array of length 2.
      * Row number at index 0, Column number at index 1.
@@ -179,4 +187,48 @@ public class MyModel extends Observable implements IModel{
         position[1] = maze.getGoalPosition().getColumnIndex();
         return position;
     }
+
+    /**
+     * Move the character according to KeyCode input.
+     * @param step movement direction
+     */
+    @Override
+    public void moveCharacter(KeyCode step) {
+
+        switch (step){
+
+            case NUMPAD8: //UP
+                characterRow ++;
+                break;
+            case NUMPAD6: //RIGHT
+                characterColumn++;
+                break;
+            case NUMPAD2: //DOWN
+                characterRow--;
+                break;
+            case NUMPAD4: //LEFT
+                characterColumn--;
+                break;
+            case NUMPAD7: //UP LEFT
+                characterColumn--;
+                characterRow++;
+                break;
+            case NUMPAD9: //UP RIGHT
+                characterRow++;
+                characterColumn++;
+                break;
+            case NUMPAD3: //DOWN RIGHT
+                characterColumn++;
+                characterRow--;
+                break;
+            case NUMPAD1: //DOWN LEFT
+                characterRow--;
+                characterColumn--;
+                break;
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+
 }
