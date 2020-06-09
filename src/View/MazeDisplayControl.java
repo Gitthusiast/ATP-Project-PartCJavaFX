@@ -4,7 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class DisplayControl extends Canvas {
+public class MazeDisplayControl extends Canvas {
 
     private int rowNum;
     private int colNum;

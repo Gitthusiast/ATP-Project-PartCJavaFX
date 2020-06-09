@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -37,8 +37,8 @@
    <center>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="83.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#Play" text="Play" />
-            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#Instruction" text="Instructions" />
+            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToPlayMenu" text="Play" />
+            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToInstructionsMenu" text="Instructions" />
          </children>
          <padding>
             <Insets left="5.0" />

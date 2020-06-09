@@ -1,3 +1,7 @@
+import Model.MyModel;
+import View.MainMenuController;
+import View.PlayViewController;
+import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +12,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        MyModel model = new MyModel();
+        MyViewModel viewModel = new MyViewModel(model);
+        PlayViewController view = new PlayViewController(viewModel);
+        //--------------
+        model.addObserver(viewModel);
+        viewModel.addObserver(view);
+        //--------------
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
         root.getStylesheets().add(getClass().getResource("View/Covid19Style.css").toString());

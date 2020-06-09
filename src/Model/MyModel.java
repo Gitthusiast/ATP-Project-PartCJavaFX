@@ -59,7 +59,6 @@ public class MyModel extends Observable implements IModel{
 
     /**
      * Generates a maze according to given dimensions.
-     *
      * @param row    Number of row.
      * @param column Number of columns.
      * @return Returns a 2-d array maze.

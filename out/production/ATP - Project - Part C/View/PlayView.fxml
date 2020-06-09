@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayControler">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -65,7 +65,7 @@
                   <TextField text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Label" />
                   <Label text="Label" GridPane.rowIndex="1" />
-                  <Button minWidth="180.0" mnemonicParsing="false" text="Generate Maze" GridPane.rowIndex="3" />
+                  <Button minWidth="180.0" mnemonicParsing="false" onAction="#generateMaze" text="Generate Maze" GridPane.rowIndex="3" />
                   <Button minWidth="180.0" mnemonicParsing="false" text="Solve Maze" GridPane.rowIndex="4" />
                   <Label minWidth="150.0" prefHeight="18.0" prefWidth="57.0" text="Position: (0,0)" GridPane.rowIndex="6" />
                   <Button contentDisplay="RIGHT" minWidth="150.0" mnemonicParsing="false" onAction="#goToMenu" text="Back to menu" GridPane.rowIndex="9" />
