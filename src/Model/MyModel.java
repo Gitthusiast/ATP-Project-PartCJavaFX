@@ -1,8 +1,5 @@
 package Model;
 
-<<<<<<< HEAD
-
-=======
 import Client.Client;
 import Client.IClientStrategy;
 import IO.MyDecompressorInputStream;
@@ -21,7 +18,6 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
->>>>>>> 70bf7d8759b46585a0fb1669d51c2ba096f09458
 import java.util.Observable;
 
 
@@ -169,8 +165,7 @@ public class MyModel extends Observable implements IModel{
         return position;
     }
 
-<<<<<<< HEAD
-=======
+
     /**
      * Returns the goal position of the maze as an int array of length 2.
      * Row number at index 0, Column number at index 1.
@@ -185,5 +180,4 @@ public class MyModel extends Observable implements IModel{
         position[1] = maze.getGoalPosition().getColumnIndex();
         return position;
     }
->>>>>>> 70bf7d8759b46585a0fb1669d51c2ba096f09458
 }
