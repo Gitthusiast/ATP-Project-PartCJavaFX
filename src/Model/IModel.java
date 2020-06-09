@@ -2,6 +2,7 @@ package Model;
 
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.search.ISearchingAlgorithm;
+import javafx.scene.input.KeyCode;
 
 public interface IModel {
 
@@ -39,4 +40,11 @@ public interface IModel {
      * @return int[]
      */
     public int[] getGoalPosition();
+
+
+    /**
+     * Move the character according to KeyCode input.
+     * @param step movement dire
+     */
+    public void moveCharacter(KeyCode step);
 }
