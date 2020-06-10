@@ -3,7 +3,9 @@ package ViewModel;
 import Model.IModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -60,6 +62,11 @@ public class MyViewModel extends Observable implements Observer {
      * Retrieves the current maze's solution.
      * @return 2-d int array representation of a maze solution.
      */
-    public int[][] solveMaze() { return model.solveMaze(); }
+    public ArrayList<int[]> solveMaze() { return model.solveMaze(); }
+
+    public void moveCharacter(KeyCode movement){ model.moveCharacter(movement);}
+
+    public int getCharacterRow(){ return characterRow; }
+    public int getCharacterColumn(){ return characterColumn; }
 
 }

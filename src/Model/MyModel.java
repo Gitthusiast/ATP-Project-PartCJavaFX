@@ -13,6 +13,7 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.ISearchingAlgorithm;
 import algorithms.search.Solution;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 
 import java.io.*;
@@ -30,7 +31,7 @@ public class MyModel extends Observable implements IModel{
     private Position currentPosition;
     private Server MazeGeneratorServer;
     private Server MazeSolverServer;
-    private int[][] solutionArray;
+    private ArrayList<int[]> solutionArray;
 
     private int characterRow;
     private int characterColumn;
@@ -111,7 +112,7 @@ public class MyModel extends Observable implements IModel{
      * @return Returns 2-d int array: 0 - part of the maze, 1 - part of the solution.
      */
     @Override
-    public int[][] solveMaze() {
+    public ArrayList<int[]> solveMaze() {
 
 
         try {
@@ -127,14 +128,15 @@ public class MyModel extends Observable implements IModel{
                         Solution mazeSolution = (Solution) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
 
                         ArrayList<AState> mazeSolutionSteps = mazeSolution.getSolutionPath();
-                        solutionArray = new int[maze.getRowNumber()][maze.getColumnNumber()];
+                        solutionArray = new ArrayList<>(); //new int[maze.getRowNumber()][maze.getColumnNumber()];
                         for (AState mazeSolutionStep : mazeSolutionSteps) {
 
                             String[] dimensions = mazeSolutionStep.toString().split("\\{},");
-                            int row = Integer.parseInt(dimensions[0]);
-                            int column = Integer.parseInt(dimensions[1]);
+                            int[] position = new int[2];
+                            position[0] = Integer.parseInt(dimensions[0]);
+                            position[1] = Integer.parseInt(dimensions[1]);
 
-                            solutionArray[row][column] = 1;
+                            solutionArray.add(position);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -158,7 +160,11 @@ public class MyModel extends Observable implements IModel{
      */
     @Override
     public int[] getCurrentPosition() {
-        return new int[0];
+        int[] res = new int[2];
+        res[0] = currentPosition.getRowIndex();
+        res[1] = currentPosition.getColumnIndex();
+
+        return res;
     }
 
     /**
@@ -199,35 +205,66 @@ public class MyModel extends Observable implements IModel{
     @Override
     public void moveCharacter(KeyCode step) {
 
+        int[][] Amaze = maze.getMaze();
+        boolean steppedOnAWall = false;
+
         switch (step){
 
             case NUMPAD8: //UP
-                characterRow ++;
+                characterRow --;
+                if(characterRow <= -1 || Amaze[characterRow][characterColumn] == 1){
+                    characterRow++; //we don't want to allow illegal moves
+                }
                 break;
             case NUMPAD6: //RIGHT
                 characterColumn++;
+                if(characterColumn >= maze.getColumnNumber() || Amaze[characterRow][characterColumn] == 1){
+                    characterColumn--;
+                }
                 break;
             case NUMPAD2: //DOWN
-                characterRow--;
+                characterRow++;
+                if(characterRow >= maze.getRowNumber() || Amaze[characterRow][characterColumn] == 1){
+                    characterRow--;
+                }
                 break;
             case NUMPAD4: //LEFT
                 characterColumn--;
+                if(characterColumn <= -1 || Amaze[characterRow][characterColumn] == 1){
+                    characterColumn++;
+                }
                 break;
             case NUMPAD7: //UP LEFT
                 characterColumn--;
-                characterRow++;
+                characterRow--;
+                if(characterColumn <= -1 || characterRow <= -1 || Amaze[characterRow][characterColumn] == 1){
+                    characterColumn++;
+                    characterRow++;
+                }
                 break;
             case NUMPAD9: //UP RIGHT
-                characterRow++;
+                characterRow--;
                 characterColumn++;
+                if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || Amaze[characterRow][characterColumn] == 1){
+                    characterRow++;
+                    characterColumn--;
+                }
                 break;
             case NUMPAD3: //DOWN RIGHT
                 characterColumn++;
-                characterRow--;
+                characterRow++;
+                if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || Amaze[characterRow][characterColumn] == 1){
+                    characterColumn--;
+                    characterRow--;
+                }
                 break;
             case NUMPAD1: //DOWN LEFT
-                characterRow--;
+                characterRow++;
                 characterColumn--;
+                if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || Amaze[characterRow][characterColumn] == 1){
+                    characterRow--;
+                    characterColumn++;
+                }
                 break;
         }
 
