@@ -4,6 +4,8 @@ import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.search.ISearchingAlgorithm;
 import javafx.scene.input.KeyCode;
 
+import java.util.ArrayList;
+
 public interface IModel {
 
     /**
@@ -18,7 +20,7 @@ public interface IModel {
      * Solves current open maze.
      * @return Returns 2-d int array: 0 - part of the maze, 1 - part of the solution.
      */
-    public int[][] solveMaze();
+    public ArrayList<int[]> solveMaze();
 
     /**
      * Returns the current position in the maze as an int array of length 2.

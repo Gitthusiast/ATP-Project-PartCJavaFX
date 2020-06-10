@@ -16,6 +16,7 @@ import java.util.Observer;
 
 public class MainMenuController {
 
+    private MyViewModel myViewModel;
 
     private MyViewModel viewModel;
 
