@@ -16,7 +16,7 @@ import java.util.Observer;
 
 public class PlayViewController implements IView, Observer {
 
-
+    @FXML
     private MyViewModel viewModel;
     private int[][] aMaze;
     @FXML

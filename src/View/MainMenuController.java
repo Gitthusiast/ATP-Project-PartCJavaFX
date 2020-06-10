@@ -16,8 +16,13 @@ import java.util.Observer;
 
 public class MainMenuController {
 
+    private MyViewModel myViewModel;
 
     public MainMenuController() { }
+
+    public MainMenuController(MyViewModel myViewModel) {
+        this.myViewModel = myViewModel;
+    }
 
     public void goToInstructionsMenu(ActionEvent actionEvent) {
         try {
@@ -34,8 +39,10 @@ public class MainMenuController {
         }
     }
 
-    public void goToPlayMenu(ActionEvent actionEvent) {
+    public void goToPlayView(ActionEvent actionEvent) {
         try {
+            PlayViewController playViewController = new PlayViewController(this.myViewModel);
+            myViewModel.addObserver(playViewController);
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("PlayView.fxml").openStream());

@@ -15,10 +15,10 @@ public class Main extends Application {
 
         MyModel model = new MyModel();
         MyViewModel viewModel = new MyViewModel(model);
-        PlayViewController view = new PlayViewController(viewModel);
+        MainMenuController view = new MainMenuController(viewModel);
+        //PlayViewController view = new PlayViewController(viewModel);
         //--------------
         model.addObserver(viewModel);
-        viewModel.addObserver(view);
         //--------------
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
