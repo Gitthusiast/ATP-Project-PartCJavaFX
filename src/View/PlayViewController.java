@@ -57,7 +57,7 @@ public class PlayViewController implements IView, Observer {
     public void displayMaze(int[][] maze){
 
         mazeDisplayControl.setMaze(maze);
-        mazeDisplayControl.setCharcterPosition(viewModel.getCharacterPositionRow(), viewModel.getCharacterPositionColumn());
+        mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
         mazeDisplayControl.drawMaze();
     }
 

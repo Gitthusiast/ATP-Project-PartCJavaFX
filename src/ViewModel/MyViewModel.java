@@ -69,4 +69,6 @@ public class MyViewModel extends Observable implements Observer {
     public int getCharacterRow(){ return characterRow; }
     public int getCharacterColumn(){ return characterColumn; }
 
+    public int[][] getMaze() { return model.getMaze(); }
+
 }

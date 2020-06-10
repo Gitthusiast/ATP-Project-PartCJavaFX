@@ -272,5 +272,5 @@ public class MyModel extends Observable implements IModel{
         notifyObservers();
     }
 
-
+    public int[][] getMaze(){ return maze.getMaze(); }
 }
