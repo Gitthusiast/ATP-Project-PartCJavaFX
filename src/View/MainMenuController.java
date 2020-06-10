@@ -18,11 +18,11 @@ public class MainMenuController {
 
     private MyViewModel myViewModel;
 
+    private MyViewModel viewModel;
+
     public MainMenuController() { }
 
-    public MainMenuController(MyViewModel myViewModel) {
-        this.myViewModel = myViewModel;
-    }
+    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
 
     public void goToInstructionsMenu(ActionEvent actionEvent) {
         try {
@@ -41,14 +41,17 @@ public class MainMenuController {
 
     public void goToPlayView(ActionEvent actionEvent) {
         try {
-            PlayViewController playViewController = new PlayViewController(this.myViewModel);
-            myViewModel.addObserver(playViewController);
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("PlayView.fxml").openStream());
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setScene(scene);
             stage.show();
+
+            PlayViewController playView = fxmlLoader.getController();
+            playView.setViewModel(viewModel);
+            viewModel.addObserver(playView);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

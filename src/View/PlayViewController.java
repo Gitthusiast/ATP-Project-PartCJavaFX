@@ -1,7 +1,7 @@
 package View;
 
-import Model.IModel;
 import ViewModel.MyViewModel;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,6 @@ import java.util.Observer;
 
 public class PlayViewController implements IView, Observer {
 
-    @FXML
     private MyViewModel viewModel;
     private int[][] aMaze;
     @FXML
@@ -27,9 +26,7 @@ public class PlayViewController implements IView, Observer {
 
     public PlayViewController() {}
 
-    public PlayViewController(MyViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
+    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
 
 
     /**
