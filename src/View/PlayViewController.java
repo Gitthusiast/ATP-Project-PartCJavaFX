@@ -9,8 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
-import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -96,14 +96,14 @@ public class PlayViewController implements IView, Observer {
     /**
      * Validates text field user input.
      * @param s input.
-     * @return True if is an integer between 0 to 100.
+     * @return True if is an integer between 2 to 100.
      */
     public boolean isValidInteger(String s){
 
         if (!isInteger(s)) return false;
 
         int sConverted = Integer.parseInt(s);
-        return sConverted >= 0 && sConverted <= 100;
+        return sConverted >= 2 && sConverted <= 100;
     }
 
 }

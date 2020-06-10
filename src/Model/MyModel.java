@@ -98,6 +98,10 @@ public class MyModel extends Observable implements IModel{
 
         if (maze == null)
             return null;
+
+        setChanged();
+        notifyObservers();
+
         return maze.getMaze();
     }
 
@@ -141,6 +145,7 @@ public class MyModel extends Observable implements IModel{
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+
 
         return solutionArray;
     }
@@ -225,6 +230,7 @@ public class MyModel extends Observable implements IModel{
                 characterColumn--;
                 break;
         }
+
         setChanged();
         notifyObservers();
     }

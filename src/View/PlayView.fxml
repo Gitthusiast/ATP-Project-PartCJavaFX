@@ -61,8 +61,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField text="50" GridPane.columnIndex="1" />
-                  <TextField text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="textField_rowNumber" text="50" GridPane.columnIndex="1" />
+                  <TextField fx:id="textField_columnNumber" text="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Label" />
                   <Label text="Label" GridPane.rowIndex="1" />
                   <Button minWidth="180.0" mnemonicParsing="false" onAction="#generateMaze" text="Generate Maze" GridPane.rowIndex="3" />
