@@ -1,19 +1,31 @@
 package View;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 
 public class MazeDisplayControl extends Canvas {
 
     private int rowNum;
     private int colNum;
     private int[][] maze;
+    private boolean showSolution = false;
+    private ArrayList<int[]> solutionList;
     int[] charcterPosition;
 
 
+    public void setMaze(int[][] maze) { this.maze = maze; }
+    public void setCharcterPosition(int rowIndex, int columnIndex){
 
-    public void DrawMaze(){
+        charcterPosition[0] = rowIndex;
+        charcterPosition[1] = columnIndex;
+    }
+
+    public void drawMaze(){
 
         double canvasWidth = this.getWidth();
         double canvasHeight = this.getHeight();
@@ -35,7 +47,28 @@ public class MazeDisplayControl extends Canvas {
             }
         }
 
+        if (showSolution){
+            graphicsContext.setFill(Color.AZURE);
+
+            for (int[] position : solutionList) {
+
+                graphicsContext.setFill(Color.AZURE);
+                graphicsContext.fillRect(position[0] * cellWidth, position[1] * cellHeight, cellWidth, cellHeight);
+            }
+
+        }
+
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillRect(charcterPosition[0] * cellWidth,charcterPosition[1] * cellHeight, cellWidth, cellHeight);
+
+
+    }
+
+    public boolean isShowSolution() {
+        return showSolution;
+    }
+
+    public void setShowSolution(boolean showSolution) {
+        this.showSolution = showSolution;
     }
 }
