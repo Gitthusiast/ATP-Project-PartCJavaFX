@@ -17,7 +17,11 @@ import java.util.Observer;
 public class MainMenuController {
 
 
+    private MyViewModel viewModel;
+
     public MainMenuController() { }
+
+    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
 
     public void goToInstructionsMenu(ActionEvent actionEvent) {
         try {
@@ -34,7 +38,7 @@ public class MainMenuController {
         }
     }
 
-    public void goToPlayMenu(ActionEvent actionEvent) {
+    public void goToPlayView(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -42,6 +46,11 @@ public class MainMenuController {
             Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
             stage.setScene(scene);
             stage.show();
+
+            PlayViewController playView = fxmlLoader.getController();
+            playView.setViewModel(viewModel);
+            viewModel.addObserver(playView);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

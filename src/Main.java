@@ -15,14 +15,15 @@ public class Main extends Application {
 
         MyModel model = new MyModel();
         MyViewModel viewModel = new MyViewModel(model);
-        PlayViewController view = new PlayViewController(viewModel);
-        //--------------
         model.addObserver(viewModel);
-        viewModel.addObserver(view);
         //--------------
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
         root.getStylesheets().add(getClass().getResource("View/Covid19Style.css").toString());
+
+        MainMenuController mainMenuView = fxmlLoader.getController();
+        mainMenuView.setViewModel(viewModel);
+
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 700));
         primaryStage.show();
