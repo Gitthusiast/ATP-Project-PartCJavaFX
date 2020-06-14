@@ -30,6 +30,8 @@ public class MazeDisplayControl extends Canvas {
 
     }
 
+    public void setSolutionList(ArrayList<int[]> solutionList) { this.solutionList = solutionList; }
+
     public void drawMaze(){
 
         double canvasWidth = this.getWidth();
@@ -60,7 +62,7 @@ public class MazeDisplayControl extends Canvas {
 
             for (int[] position : solutionList) {
 
-                graphicsContext.setFill(Color.AZURE);
+                graphicsContext.setFill(Color.YELLOW);
                 graphicsContext.fillRect( position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);
             }
 

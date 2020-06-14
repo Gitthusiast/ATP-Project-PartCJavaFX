@@ -5,15 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<<<<<<< HEAD
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
-=======
-<<<<<<< HEAD
-<BorderPane onKeyPressed="#KeyPressed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
-=======
-<BorderPane stylesheets="@/View/Covid19Style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
->>>>>>> 51e32d7513f77b4f926da22f2075949b17bc7ca2
->>>>>>> 9816e4e0fc4f58c62472b306e596cab6dae46028
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#KeyPressed" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -83,15 +75,8 @@
       </HBox>
    </bottom>
    <center>
-<<<<<<< HEAD
        <Pane fx:id="mazePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <MazeDisplayControl fx:id="mazeDisplayControl" height="300.0" nodeOrientation="INHERIT" width="300.0" />
-=======
-       <Pane minHeight="400.0" minWidth="400.0" BorderPane.alignment="CENTER">
-           <children>
-               <MazeDisplayControl fx:id="mazeDisplayControl" height="400" layoutX="87.0" layoutY="6.0" onMouseClicked="#mouseClicked" width="400" />
-           </children>
->>>>>>> 9816e4e0fc4f58c62472b306e596cab6dae46028
+           <MazeDisplayControl fx:id="mazeDisplayControl" height="200.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" width="450.0" />
        </Pane>
    </center>
 </BorderPane>

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +20,7 @@ public class PlayViewController implements IView, Observer {
 
     private MyViewModel viewModel;
     private Scene mainMenuScene;
+    private ArrayList<int[]> solutionList = null;
 
     @FXML
     private TextField textField_rowNumber;
@@ -82,6 +84,11 @@ public class PlayViewController implements IView, Observer {
         if(isValidInteger(textField_rowNumber.getText()) && isValidInteger(textField_columnNumber.getText())){
 
             generateMazeButton.setDisable(true);
+
+            solutionList = null;
+            mazeDisplayControl.setShowSolution(false);
+            showSolutionButton.setText("Show Solution");
+
             rowNumber = Integer.parseInt(textField_rowNumber.getText());
             columnNumber = Integer.parseInt(textField_columnNumber.getText());
             viewModel.generateMaze(rowNumber, columnNumber);
@@ -130,12 +137,16 @@ public class PlayViewController implements IView, Observer {
         }
 
         showSolutionButton.setDisable(true);
+        if (solutionList == null){
+            solutionList = viewModel.solveMaze();
+            mazeDisplayControl.setSolutionList(solutionList);
+        }
         mazeDisplayControl.drawMaze();
         showSolutionButton.setDisable(false);
     }
 
     public void mouseClicked(MouseEvent mouseEvent) {
-        //mazeDisplayControl.requestFocus();
+        mazeDisplayControl.requestFocus();
     }
 
     public void KeyPressed(KeyEvent keyEvent){
