@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.InstructionsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.InstructionsController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -39,15 +40,24 @@
       </MenuBar>
    </top>
    <center>
-      <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.3883248730964467" orientation="VERTICAL" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="188.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/resources/Images/arrows.png" />
                </image>
             </ImageView>
-            <Label contentDisplay="TEXT_ONLY" prefHeight="216.0" prefWidth="260.0" text="Hello young virus, welcome to the real world. Your big brother' Covid19 is enslaving the whole world. In order to become as great as him you shoud train. You need to find your way out of the maze, your score will be saved, once you are ready YOU WILL ENSLVE THE WORLD. But first focus on reaching to the red cell, use your numpad to move within the maze. Click Play, then generate to start the game. If you give up you can see the answer by pressing the solve button. GOOD LUCK AND MAY THE INFECTION RATES BE WITH YOU." wrapText="true" />
+            <Label contentDisplay="TEXT_ONLY" prefHeight="165.0" prefWidth="491.0" text="Hello young virus, welcome to the real world.&#10;Your big brother Covid19 is infecting the whole world. In order to become as great as him you shoud train.&#10;You need to find your way out of the maze. Your score will be saved, once you are ready YOU WILL INFECT THE WORLD.&#10;But first, focus on reaching to the lungs - the most susceptible organ. Use your numpad to move within the maze. Click Play, then generate  a maze to start the game.&#10;If you give up you can see the answer by pressing the &quot;Show Solution&quot; button.&#10;GOOD LUCK AND MAY THE INFECTION RATES BE WITH YOU." wrapText="true" />
          </items>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </SplitPane>
    </center>
 

@@ -27,6 +27,7 @@ public class MazeDisplayControl extends Canvas {
 
         charcterPosition[0] = rowIndex;
         charcterPosition[1] = columnIndex;
+
     }
 
     public void drawMaze(){

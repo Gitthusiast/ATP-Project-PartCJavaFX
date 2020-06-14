@@ -37,7 +37,7 @@
    <center>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="83.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToPlayView" text="Play" />
+            <Button fx:id="playButton" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToPlayView" text="Play" />
             <Button minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToInstructionsMenu" text="Instructions" />
          </children>
          <padding>

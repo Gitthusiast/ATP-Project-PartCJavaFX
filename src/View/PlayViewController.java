@@ -4,9 +4,7 @@ import ViewModel.MyViewModel;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
@@ -20,6 +18,7 @@ import java.util.Observer;
 public class PlayViewController implements IView, Observer {
 
     private MyViewModel viewModel;
+    private Scene mainMenuScene;
 
     @FXML
     private TextField textField_rowNumber;
@@ -36,7 +35,7 @@ public class PlayViewController implements IView, Observer {
     public PlayViewController() {}
 
     public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
-
+    public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
 
     /**
      * This method is called whenever the observed object is changed. An
@@ -63,13 +62,10 @@ public class PlayViewController implements IView, Observer {
         mazeDisplayControl.drawMaze();
     }
 
-    public void goToMenu(ActionEvent actionEvent) {
+    public void goToMainMenu(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("MyView.fxml").openStream());
-            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-            stage.setScene(scene);
+            stage.setScene(mainMenuScene);
             stage.show();
         } catch (Exception e) {
 
