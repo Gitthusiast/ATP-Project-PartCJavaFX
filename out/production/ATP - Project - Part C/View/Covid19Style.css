@@ -8,5 +8,5 @@ Indian Red #D3686A
 
 .root{
 
-    -fx-background-color: radial-gradient(radius 0, #BA0B0D, #D3686A);
+    -fx-background-color: radial-gradient(radius 20px, blue, blue);
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
+<BorderPane stylesheets="@/View/Covid19Style.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -39,7 +39,7 @@
                <children>
                   <Label fx:id="label_rowNumber" text="Number of rows:" />
                   <TextField fx:id="textField_rowNumber" promptText="please enter a number" />
-                  <Label fx:id="label_rowNumber" text="Number of columns:" />
+                  <Label fx:id="label_columnNumber" text="Number of columns:" />
                   <TextField fx:id="textField_columnNumber" promptText="please enter a number" />
                </children>
                <opaqueInsets>
