@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
@@ -130,5 +132,14 @@ public class PlayViewController implements IView, Observer {
         showSolutionButton.setDisable(true);
         mazeDisplayControl.drawMaze();
         showSolutionButton.setDisable(false);
+    }
+
+    public void mouseClicked(MouseEvent mouseEvent) {
+        //mazeDisplayControl.requestFocus();
+    }
+
+    public void KeyPressed(KeyEvent keyEvent){
+        viewModel.moveCharacter(keyEvent.getCode());
+        //keyEvent.consume();
     }
 }

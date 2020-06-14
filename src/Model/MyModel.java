@@ -8,12 +8,9 @@ import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
-import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.ISearchingAlgorithm;
 import algorithms.search.Solution;
-import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 
 import java.io.*;
@@ -236,7 +233,9 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD7: //UP LEFT
                 characterColumn--;
                 characterRow--;
-                if(characterColumn <= -1 || characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
+
+                if(characterColumn <= -1 || characterRow <= -1 || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow][characterColumn+1]==1 && aMaze[characterRow+1][characterColumn]==1)){
+
                     characterColumn++;
                     characterRow++;
                 }
@@ -244,7 +243,9 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD9: //UP RIGHT
                 characterRow--;
                 characterColumn++;
-                if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
+
+                if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow][characterColumn-1]==1 && aMaze[characterRow+1][characterColumn]==1)){
+
                     characterRow++;
                     characterColumn--;
                 }
@@ -252,7 +253,9 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD3: //DOWN RIGHT
                 characterColumn++;
                 characterRow++;
-                if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
+
+                if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow-1][characterColumn]==1 && aMaze[characterRow][characterColumn-1]==1)){
+
                     characterColumn--;
                     characterRow--;
                 }
@@ -260,7 +263,9 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD1: //DOWN LEFT
                 characterRow++;
                 characterColumn--;
-                if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
+
+                if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow-1][characterColumn]==1 && aMaze[characterRow][characterColumn+1]==1)){
+
                     characterRow--;
                     characterColumn++;
                 }

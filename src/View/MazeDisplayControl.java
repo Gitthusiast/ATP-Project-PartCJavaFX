@@ -39,17 +39,18 @@ public class MazeDisplayControl extends Canvas {
         double cellHeight = canvasHeight/rowNum;
 
         GraphicsContext graphicsContext = getGraphicsContext2D(); //get the relevant graphic context so that we can draw on owr canvas
-        graphicsContext.clearRect(0, 0, getWidth(), getHeight());
+        graphicsContext.clearRect(0,0, getWidth(), getHeight());
 
         for(int i=0; i<rowNum; i++){
             for(int j=0; j<colNum; j++){
                 if(maze[i][j] == 1) {
                     graphicsContext.setFill(Color.BROWN);
-                    graphicsContext.fillRect(i * cellWidth, j * cellHeight,cellWidth,cellHeight);
+                    graphicsContext.fillRect(j * cellWidth, i * cellHeight,cellWidth,cellHeight);
                 }
                 else{
                     graphicsContext.setFill(Color.RED);
-                    graphicsContext.fillRect(i * cellWidth, j * cellHeight,cellWidth,cellHeight);
+                    //graphicsContext.fillRect(i * cellWidth, j * cellHeight,cellWidth,cellHeight);
+                    graphicsContext.fillRect(j * cellWidth, i * cellHeight,cellWidth,cellHeight);
                 }
             }
         }
@@ -60,13 +61,14 @@ public class MazeDisplayControl extends Canvas {
             for (int[] position : solutionList) {
 
                 graphicsContext.setFill(Color.AZURE);
-                graphicsContext.fillRect(position[0] * cellWidth, position[1] * cellHeight, cellWidth, cellHeight);
+                graphicsContext.fillRect( position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);
             }
 
         }
 
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(charcterPosition[0] * cellWidth,charcterPosition[1] * cellHeight, cellWidth, cellHeight);
+        graphicsContext.fillRect(charcterPosition[1] * cellWidth,charcterPosition[0] * cellHeight, cellWidth, cellHeight);
+
 
 
     }
