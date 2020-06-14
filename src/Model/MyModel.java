@@ -127,10 +127,10 @@ public class MyModel extends Observable implements IModel{
                         solutionArray = new ArrayList<>(); //new int[maze.getRowNumber()][maze.getColumnNumber()];
                         for (AState mazeSolutionStep : mazeSolutionSteps) {
 
-                            String[] dimensions = mazeSolutionStep.toString().split("\\{},");
+                            String[] dimensions = mazeSolutionStep.toString().split("[{},]");
                             int[] position = new int[2];
-                            position[0] = Integer.parseInt(dimensions[0]);
-                            position[1] = Integer.parseInt(dimensions[1]);
+                            position[0] = Integer.parseInt(dimensions[1]);
+                            position[1] = Integer.parseInt(dimensions[2]);
 
                             solutionArray.add(position);
                         }

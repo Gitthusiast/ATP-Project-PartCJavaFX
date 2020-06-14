@@ -22,12 +22,17 @@ public class MazeDisplayControl extends Canvas {
         this.maze = maze;
         rowNum = maze.length;
         colNum = maze[0].length;
+        this.solutionList = solutionList;
     }
     public void setCharcterPosition(int rowIndex, int columnIndex){
 
         charcterPosition[0] = rowIndex;
         charcterPosition[1] = columnIndex;
 
+    }
+
+    public void setSolutionList(ArrayList<int[]> solutionList) {
+        this.solutionList = solutionList;
     }
 
     public void drawMaze(){
@@ -60,7 +65,7 @@ public class MazeDisplayControl extends Canvas {
 
             for (int[] position : solutionList) {
 
-                graphicsContext.setFill(Color.AZURE);
+                graphicsContext.setFill(Color.YELLOW);
                 graphicsContext.fillRect( position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);
             }
 

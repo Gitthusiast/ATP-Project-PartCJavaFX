@@ -6,12 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +21,7 @@ public class PlayViewController implements IView, Observer {
 
     private MyViewModel viewModel;
     private Scene mainMenuScene;
+    private ArrayList<int[]> solutionList = null;
 
     @FXML
     private TextField textField_rowNumber;
@@ -56,7 +59,6 @@ public class PlayViewController implements IView, Observer {
     }
 
     public void displayMaze(int[][] maze){
-
         mazeDisplayControl.setMaze(maze);
         mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
         mazeDisplayControl.drawMaze();
@@ -82,11 +84,21 @@ public class PlayViewController implements IView, Observer {
         if(isValidInteger(textField_rowNumber.getText()) && isValidInteger(textField_columnNumber.getText())){
 
             generateMazeButton.setDisable(true);
+
+            solutionList = null;
+            mazeDisplayControl.setShowSolution(false);
+            showSolutionButton.setText("Show Solution");
+
             rowNumber = Integer.parseInt(textField_rowNumber.getText());
             columnNumber = Integer.parseInt(textField_columnNumber.getText());
             viewModel.generateMaze(rowNumber, columnNumber);
         }
-        //else { alertInvalidMazeDimensions(); }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid parameter");
+            alert.setContentText("Wrong parameter received! Please enter an integer value between 2 and 100");
+            alert.showAndWait();
+        }
 
     }
 
@@ -130,12 +142,16 @@ public class PlayViewController implements IView, Observer {
         }
 
         showSolutionButton.setDisable(true);
+        if(solutionList == null){
+            solutionList = viewModel.solveMaze();
+            mazeDisplayControl.setSolutionList(solutionList);
+        }
         mazeDisplayControl.drawMaze();
         showSolutionButton.setDisable(false);
     }
 
     public void mouseClicked(MouseEvent mouseEvent) {
-        //mazeDisplayControl.requestFocus();
+        mazeDisplayControl.requestFocus();
     }
 
     public void KeyPressed(KeyEvent keyEvent){
