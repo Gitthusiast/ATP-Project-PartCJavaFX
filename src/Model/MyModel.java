@@ -28,7 +28,6 @@ public class MyModel extends Observable implements IModel{
     private IMazeGenerator generator;
     private ISearchingAlgorithm solver;
     private Maze maze;
-    private Position currentPosition;
     private Server MazeGeneratorServer;
     private Server MazeSolverServer;
     private ArrayList<int[]> solutionArray;
@@ -161,8 +160,8 @@ public class MyModel extends Observable implements IModel{
     @Override
     public int[] getCurrentPosition() {
         int[] res = new int[2];
-        res[0] = currentPosition.getRowIndex();
-        res[1] = currentPosition.getColumnIndex();
+        res[0] = characterRow;
+        res[1] = characterColumn;
 
         return res;
     }
@@ -205,39 +204,39 @@ public class MyModel extends Observable implements IModel{
     @Override
     public void moveCharacter(KeyCode step) {
 
-        int[][] Amaze = maze.getMaze();
+        int[][] aMaze = maze.getMaze();
         boolean steppedOnAWall = false;
 
         switch (step){
 
             case NUMPAD8: //UP
                 characterRow --;
-                if(characterRow <= -1 || Amaze[characterRow][characterColumn] == 1){
+                if(characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
                     characterRow++; //we don't want to allow illegal moves
                 }
                 break;
             case NUMPAD6: //RIGHT
                 characterColumn++;
-                if(characterColumn >= maze.getColumnNumber() || Amaze[characterRow][characterColumn] == 1){
+                if(characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
                     characterColumn--;
                 }
                 break;
             case NUMPAD2: //DOWN
                 characterRow++;
-                if(characterRow >= maze.getRowNumber() || Amaze[characterRow][characterColumn] == 1){
+                if(characterRow >= maze.getRowNumber() || aMaze[characterRow][characterColumn] == 1){
                     characterRow--;
                 }
                 break;
             case NUMPAD4: //LEFT
                 characterColumn--;
-                if(characterColumn <= -1 || Amaze[characterRow][characterColumn] == 1){
+                if(characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
                     characterColumn++;
                 }
                 break;
             case NUMPAD7: //UP LEFT
                 characterColumn--;
                 characterRow--;
-                if(characterColumn <= -1 || characterRow <= -1 || Amaze[characterRow][characterColumn] == 1){
+                if(characterColumn <= -1 || characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
                     characterColumn++;
                     characterRow++;
                 }
@@ -245,7 +244,7 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD9: //UP RIGHT
                 characterRow--;
                 characterColumn++;
-                if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || Amaze[characterRow][characterColumn] == 1){
+                if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
                     characterRow++;
                     characterColumn--;
                 }
@@ -253,7 +252,7 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD3: //DOWN RIGHT
                 characterColumn++;
                 characterRow++;
-                if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || Amaze[characterRow][characterColumn] == 1){
+                if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
                     characterColumn--;
                     characterRow--;
                 }
@@ -261,7 +260,7 @@ public class MyModel extends Observable implements IModel{
             case NUMPAD1: //DOWN LEFT
                 characterRow++;
                 characterColumn--;
-                if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || Amaze[characterRow][characterColumn] == 1){
+                if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
                     characterRow--;
                     characterColumn++;
                 }

@@ -15,14 +15,19 @@ public class MazeDisplayControl extends Canvas {
     private int[][] maze;
     private boolean showSolution = false;
     private ArrayList<int[]> solutionList;
-    int[] charcterPosition;
+    int[] charcterPosition = new int[2];
 
 
-    public void setMaze(int[][] maze) { this.maze = maze; }
+    public void setMaze(int[][] maze) {
+        this.maze = maze;
+        rowNum = maze.length;
+        colNum = maze[0].length;
+    }
     public void setCharcterPosition(int rowIndex, int columnIndex){
 
         charcterPosition[0] = rowIndex;
         charcterPosition[1] = columnIndex;
+
     }
 
     public void drawMaze(){
@@ -34,6 +39,8 @@ public class MazeDisplayControl extends Canvas {
         double cellHeight = canvasHeight/rowNum;
 
         GraphicsContext graphicsContext = getGraphicsContext2D(); //get the relevant graphic context so that we can draw on owr canvas
+        graphicsContext.clearRect(0, 0, getWidth(), getHeight());
+
         for(int i=0; i<rowNum; i++){
             for(int j=0; j<colNum; j++){
                 if(maze[i][j] == 1) {
