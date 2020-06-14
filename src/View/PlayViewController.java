@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
@@ -17,11 +20,17 @@ import java.util.Observer;
 public class PlayViewController implements IView, Observer {
 
     private MyViewModel viewModel;
-    private int[][] aMaze;
+
     @FXML
     private TextField textField_rowNumber;
     @FXML
     private TextField textField_columnNumber;
+    @FXML
+    private MazeDisplayControl mazeDisplayControl;
+    @FXML
+    Button showSolutionButton;
+    @FXML
+    Button generateMazeButton;
 
 
     public PlayViewController() {}
@@ -40,9 +49,18 @@ public class PlayViewController implements IView, Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        if(o== viewModel){
+        if(o == viewModel){
 
+            displayMaze(viewModel.getMaze());
+            generateMazeButton.setDisable(false);
         }
+    }
+
+    public void displayMaze(int[][] maze){
+
+        mazeDisplayControl.setMaze(maze);
+        mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
+        mazeDisplayControl.drawMaze();
     }
 
     public void goToMenu(ActionEvent actionEvent) {
@@ -67,11 +85,10 @@ public class PlayViewController implements IView, Observer {
 
         if(isValidInteger(textField_rowNumber.getText()) && isValidInteger(textField_columnNumber.getText())){
 
+            generateMazeButton.setDisable(true);
             rowNumber = Integer.parseInt(textField_rowNumber.getText());
             columnNumber = Integer.parseInt(textField_columnNumber.getText());
-            aMaze = viewModel.generateMaze(rowNumber, columnNumber);
-
-            //displayMaze(aMaze);
+            viewModel.generateMaze(rowNumber, columnNumber);
         }
         //else { alertInvalidMazeDimensions(); }
 
@@ -103,4 +120,30 @@ public class PlayViewController implements IView, Observer {
         return sConverted >= 2 && sConverted <= 100;
     }
 
+    public void showSolution(){
+
+        if (mazeDisplayControl.isShowSolution()){
+
+            mazeDisplayControl.setShowSolution(false);
+            showSolutionButton.setText("Show Solution");
+        }
+        else{
+
+            mazeDisplayControl.setShowSolution(true);
+            showSolutionButton.setText("Hide Solution");
+        }
+
+        showSolutionButton.setDisable(true);
+        mazeDisplayControl.drawMaze();
+        showSolutionButton.setDisable(false);
+    }
+
+    public void mouseClicked(MouseEvent mouseEvent) {
+        //mazeDisplayControl.requestFocus();
+    }
+
+    public void KeyPressed(KeyEvent keyEvent){
+        viewModel.moveCharacter(keyEvent.getCode());
+        //keyEvent.consume();
+    }
 }

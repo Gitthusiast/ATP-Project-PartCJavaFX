@@ -19,7 +19,7 @@ public class Main extends Application {
         //--------------
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
-        root.getStylesheets().add(getClass().getResource("View/Covid19Style.css").toString());
+        //root.getStylesheets().add(getClass().getResource("View/Covid19Style.css").toString());
 
         MainMenuController mainMenuView = fxmlLoader.getController();
         mainMenuView.setViewModel(viewModel);

@@ -48,4 +48,7 @@ public interface IModel {
      * @param step movement direction
      */
     public void moveCharacter(KeyCode step);
+
+
+    public int[][] getMaze();
 }
