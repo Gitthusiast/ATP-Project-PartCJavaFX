@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -58,7 +59,6 @@ public class PlayViewController implements IView, Observer {
     }
 
     public void displayMaze(int[][] maze){
-
         mazeDisplayControl.setMaze(maze);
         mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
         mazeDisplayControl.drawMaze();
@@ -93,7 +93,12 @@ public class PlayViewController implements IView, Observer {
             columnNumber = Integer.parseInt(textField_columnNumber.getText());
             viewModel.generateMaze(rowNumber, columnNumber);
         }
-        //else { alertInvalidMazeDimensions(); }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid parameter");
+            alert.setContentText("Wrong parameter received! Please enter an integer value between 2 and 100");
+            alert.showAndWait();
+        }
 
     }
 
