@@ -22,7 +22,6 @@ public class MazeDisplayControl extends Canvas {
         this.maze = maze;
         rowNum = maze.length;
         colNum = maze[0].length;
-        this.solutionList = solutionList;
     }
     public void setCharcterPosition(int rowIndex, int columnIndex){
 
@@ -52,7 +51,6 @@ public class MazeDisplayControl extends Canvas {
                 }
                 else{
                     graphicsContext.setFill(Color.RED);
-                    //graphicsContext.fillRect(i * cellWidth, j * cellHeight,cellWidth,cellHeight);
                     graphicsContext.fillRect(j * cellWidth, i * cellHeight,cellWidth,cellHeight);
                 }
             }

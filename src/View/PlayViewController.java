@@ -1,17 +1,24 @@
 package View;
 
+import IO.MyCompressorOutputStream;
+import IO.MyDecompressorInputStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,7 +26,9 @@ import java.util.Observer;
 public class PlayViewController extends AView implements Observer {
 
     private Scene mainMenuScene;
+    private MainMenuController mainMenuController;
     private ArrayList<int[]> solutionList = null;
+    private FileChooser fileChooser;
 
     @FXML
     private TextField textField_rowNumber;
@@ -28,15 +37,24 @@ public class PlayViewController extends AView implements Observer {
     @FXML
     private MazeDisplayControl mazeDisplayControl;
     @FXML
-    Button showSolutionButton;
+    private Button showSolutionButton;
     @FXML
-    Button generateMazeButton;
+    private Button generateMazeButton;
     @FXML
-    Button mainMenuReturnButton;
+    private Button mainMenuReturnButton;
+    @FXML
+    private MenuItem saveMenuOption;
 
-    public PlayViewController() {}
+    public PlayViewController() {
+
+        fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("MAZE file (*.maze)", "*.maze");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+    }
 
     public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
+
+    public void setMainMenuController(MainMenuController mainMenuController) { this.mainMenuController = mainMenuController; }
 
     /**
      * This method is called whenever the observed object is changed. An
@@ -53,6 +71,7 @@ public class PlayViewController extends AView implements Observer {
 
             displayMaze(viewModel.getMaze());
             generateMazeButton.setDisable(false);
+            saveMenuOption.setDisable(false);
         }
     }
 
@@ -165,5 +184,59 @@ public class PlayViewController extends AView implements Observer {
         viewModel.moveCharacter(keyEvent.getCode());
         //keyEvent.consume();
     }
+
+    @FXML
+    public void saveMaze(ActionEvent actionEvent){
+
+        File saveDestination = fileChooser.showSaveDialog(menuBar.getScene().getWindow());
+
+        if (saveDestination != null){
+
+            try (ObjectOutputStream saveStream = new ObjectOutputStream(new FileOutputStream(saveDestination))) {
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                MyCompressorOutputStream compressorOutputStream = new MyCompressorOutputStream(byteArrayOutputStream);
+                compressorOutputStream.write(viewModel.getMazeByteArray());
+                saveStream.writeObject(byteArrayOutputStream.toByteArray());
+
+                saveStream.writeObject(viewModel.getCharacterRow());
+                saveStream.writeObject(viewModel.getCharacterColumn());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void loadMaze(ActionEvent actionEvent){
+
+        File loadDestination = fileChooser.showOpenDialog(menuBar.getScene().getWindow());
+
+        if (loadDestination != null){
+
+            try (ObjectInputStream loadStream = new ObjectInputStream(new FileInputStream(loadDestination))) {
+
+
+                //Reading maze information from saved file
+                byte[] compressedMaze = (byte[]) loadStream.readObject(); //read generated maze (compressed with MyCompressor) from server
+                InputStream inputStream = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
+                byte[] decompressedMaze = new byte[viewModel.getMaze().length * viewModel.getMaze()[0].length + 50 /* assuming max maze size 1000x1000 */]; //allocating byte[] for the decompressed maze -
+                inputStream.read(decompressedMaze); //Fill decompressedMaze with bytes
+
+
+                int characterRow = (int) loadStream.readObject();
+                int characterColumn = (int) loadStream.readObject();
+
+                viewModel.updateMaze(decompressedMaze, characterRow, characterColumn);
+
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void goToInstructionsMenu(ActionEvent actionEvent){ mainMenuController.goToInstructionsMenu(actionEvent); }
 
 }

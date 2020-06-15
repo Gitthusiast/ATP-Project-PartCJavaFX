@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class MainMenuController extends AView {
@@ -24,12 +25,24 @@ public class MainMenuController extends AView {
     @FXML
     private Button instructionsButton;
 
+    @FXML
     public void goToInstructionsMenu(ActionEvent actionEvent) {
+
+        Stage stage;
+
         try {
-            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+
+            if (actionEvent.getSource() instanceof Node){
+
+                stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            }
+            else{
+                stage = (Stage) ((MenuItem) actionEvent.getSource()).getParentPopup().getScene().getWindow();
+            }
             Scene mainMenuScene = instructionsButton.getScene();
 
             if(instructionsScene == null){
+
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getResource("Instructions.fxml").openStream());
                 instructionsController = fxmlLoader.getController();
@@ -41,7 +54,7 @@ public class MainMenuController extends AView {
             stage.setScene(instructionsScene);
             stage.show();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -63,6 +76,7 @@ public class MainMenuController extends AView {
 
 
             playViewController.setMainMenuScene(mainMenuScene);
+            playViewController.setMainMenuController(this);
             viewModel.addObserver(playViewController);
 
             stage.setScene(playViewScene);

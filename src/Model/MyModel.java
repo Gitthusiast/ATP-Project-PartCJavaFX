@@ -6,10 +6,8 @@ import IO.MyDecompressorInputStream;
 import Server.Server;
 import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
-import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
-import algorithms.search.ISearchingAlgorithm;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 
@@ -22,8 +20,6 @@ import java.util.Observable;
 
 public class MyModel extends Observable implements IModel{
 
-    private IMazeGenerator generator;
-    private ISearchingAlgorithm solver;
     private Maze maze;
     private Server MazeGeneratorServer;
     private Server MazeSolverServer;
@@ -37,7 +33,6 @@ public class MyModel extends Observable implements IModel{
         maze = null;
         startServers();
     }
-
 
     private void startServers(){
 
@@ -124,7 +119,7 @@ public class MyModel extends Observable implements IModel{
                         Solution mazeSolution = (Solution) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
 
                         ArrayList<AState> mazeSolutionSteps = mazeSolution.getSolutionPath();
-                        solutionArray = new ArrayList<>(); //new int[maze.getRowNumber()][maze.getColumnNumber()];
+                        solutionArray = new ArrayList<>();
                         for (AState mazeSolutionStep : mazeSolutionSteps) {
 
                             String[] dimensions = mazeSolutionStep.toString().split("[{},]");
@@ -285,4 +280,20 @@ public class MyModel extends Observable implements IModel{
      * @return Returns the maze as a byte array containing all relevant details.
      */
     public byte[] getMazeByteArray() { return maze.toByteArray(); }
+
+    /**
+     * Updates the model with a given maze byte array and current character position.
+     * @param decompressedMaze Maze in a byte array form
+     * @param characterRow
+     * @param characterColumn
+     */
+    public void updateMaze(byte[] decompressedMaze, int characterRow, int characterColumn) {
+
+        maze = new Maze(decompressedMaze);
+        this.characterRow = characterRow;
+        this.characterColumn = characterColumn;
+
+        setChanged();
+        notifyObservers();
+    }
 }

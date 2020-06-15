@@ -10,25 +10,23 @@
          <children>
             <MenuBar fx:id="menuBar">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" onAction="#saveMaze" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Load" />
-                  </items>
-                </Menu>
                 <Menu mnemonicParsing="false" text="Options">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Properties..." />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Exit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Help" />
-                  <Menu mnemonicParsing="false" text="About" />
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#goToInstructionsMenu" text="Instructions" />
+                     </items></Menu>
+                  <Menu mnemonicParsing="false" text="About">
+                     <items>
+                      <Menu mnemonicParsing="false" text="Exit">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="About" />
+                        </items>
+                      </Menu>
+                     </items></Menu>
               </menus>
             </MenuBar>
          </children>

@@ -59,4 +59,12 @@ public interface IModel {
      * @return Returns the maze as a byte array containing all relevant details.
      */
     public byte[] getMazeByteArray();
+
+    /**
+     * Updates the model with a given maze byte array and current character position.
+     * @param decompressedMaze Maze in a byte array form
+     * @param characterRow
+     * @param characterColumn
+     */
+    public void updateMaze(byte[] decompressedMaze, int characterRow, int characterColumn);
 }

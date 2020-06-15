@@ -73,4 +73,11 @@ public class MyViewModel extends Observable implements Observer {
 
     public byte[] getMazeByteArray() { return model.getMazeByteArray(); }
 
+    /**
+     * Updates the model with a given maze byte array and current character position.
+     * @param decompressedMaze Maze in a byte array form
+     * @param characterRow
+     * @param characterColumn
+     */
+    public void updateMaze(byte[] decompressedMaze, int characterRow, int characterColumn) { model.updateMaze(decompressedMaze , characterRow, characterColumn); }
 }
