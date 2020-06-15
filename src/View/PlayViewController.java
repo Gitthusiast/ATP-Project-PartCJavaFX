@@ -1,7 +1,5 @@
 package View;
 
-import ViewModel.MyViewModel;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,9 +16,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class PlayViewController implements IView, Observer {
+public class PlayViewController extends AView implements Observer {
 
-    private MyViewModel viewModel;
     private Scene mainMenuScene;
     private ArrayList<int[]> solutionList = null;
 
@@ -37,10 +34,8 @@ public class PlayViewController implements IView, Observer {
     @FXML
     Button mainMenuReturnButton;
 
-
     public PlayViewController() {}
 
-    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
     public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
 
     /**
@@ -170,4 +165,5 @@ public class PlayViewController implements IView, Observer {
         viewModel.moveCharacter(keyEvent.getCode());
         //keyEvent.consume();
     }
+
 }

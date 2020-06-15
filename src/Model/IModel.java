@@ -50,5 +50,13 @@ public interface IModel {
     public void moveCharacter(KeyCode step);
 
 
+    /**
+     * @return Return 2-d array containing maze content as 1 and 0 values (1 - wall, 0 - path).
+     */
     public int[][] getMaze();
+
+    /**
+     * @return Returns the maze as a byte array containing all relevant details.
+     */
+    public byte[] getMazeByteArray();
 }

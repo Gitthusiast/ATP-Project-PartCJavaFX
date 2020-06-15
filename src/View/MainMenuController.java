@@ -1,6 +1,5 @@
 package View;
 
-import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class MainMenuController {
+public class MainMenuController extends AView {
 
-    private MyViewModel viewModel;
     private Scene playViewScene;
     private Scene instructionsScene;
 
@@ -23,25 +21,22 @@ public class MainMenuController {
 
     @FXML
     private Button playButton;
-
     @FXML
     private Button instructionsButton;
-
-    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
 
     public void goToInstructionsMenu(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene menuScene = instructionsButton.getScene();
+            Scene mainMenuScene = instructionsButton.getScene();
 
             if(instructionsScene == null){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getResource("Instructions.fxml").openStream());
                 instructionsController = fxmlLoader.getController();
-                instructionsScene = new Scene(root,menuScene.getWidth(), menuScene.getHeight());
+                instructionsScene = new Scene(root,mainMenuScene.getWidth(), mainMenuScene.getHeight());
             }
 
-            instructionsController.setMainMenuScene(menuScene);
+            instructionsController.setMainMenuScene(mainMenuScene);
 
             stage.setScene(instructionsScene);
             stage.show();
@@ -54,20 +49,20 @@ public class MainMenuController {
         try {
 
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene meneScene = playButton.getScene();
+            Scene mainMenuScene = playButton.getScene();
 
             if (playViewScene == null){
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 Parent root = fxmlLoader.load(getClass().getResource("PlayView.fxml").openStream());
                 playViewController = fxmlLoader.getController();
-                playViewScene = new Scene(root, meneScene.getWidth(), meneScene.getHeight());
+                playViewScene = new Scene(root, mainMenuScene.getWidth(), mainMenuScene.getHeight());
 
             }
 
 
-            playViewController.setViewModel(viewModel);
-            playViewController.setMainMenuScene(meneScene);
+
+            playViewController.setMainMenuScene(mainMenuScene);
             viewModel.addObserver(playViewController);
 
             stage.setScene(playViewScene);

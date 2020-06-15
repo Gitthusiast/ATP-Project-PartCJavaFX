@@ -1,6 +1,6 @@
 import Model.MyModel;
+import View.AView;
 import View.MainMenuController;
-import View.PlayViewController;
 import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,10 +19,8 @@ public class Main extends Application {
         //--------------
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
-        //root.getStylesheets().add(getClass().getResource("View/Covid19Style.css").toString());
 
-        MainMenuController mainMenuView = fxmlLoader.getController();
-        mainMenuView.setViewModel(viewModel);
+        AView.setViewModel(viewModel);
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 700));
@@ -30,7 +28,5 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) { launch(args); }
 }
