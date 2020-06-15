@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.stage.Window;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -33,6 +34,8 @@ public class PlayViewController implements IView, Observer {
     Button showSolutionButton;
     @FXML
     Button generateMazeButton;
+    @FXML
+    Button mainMenuReturnButton;
 
 
     public PlayViewController() {}
@@ -66,8 +69,17 @@ public class PlayViewController implements IView, Observer {
 
     public void goToMainMenu(ActionEvent actionEvent) {
         try {
+            double playWindowWidth = mainMenuReturnButton.getScene().getWindow().getWidth();
+            double playWindowHeight = mainMenuReturnButton.getScene().getWindow().getHeight();
+
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(mainMenuScene);
+
+            Window mainMenuWindow = mainMenuScene.getWindow();
+
+            mainMenuWindow.setWidth(playWindowWidth);
+            mainMenuWindow.setHeight(playWindowHeight);
+
             stage.show();
         } catch (Exception e) {
 
