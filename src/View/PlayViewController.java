@@ -154,7 +154,7 @@ public class PlayViewController implements IView, Observer {
         }
 
         showSolutionButton.setDisable(true);
-        if(solutionList == null){
+        if (solutionList == null){
             solutionList = viewModel.solveMaze();
             mazeDisplayControl.setSolutionList(solutionList);
         }

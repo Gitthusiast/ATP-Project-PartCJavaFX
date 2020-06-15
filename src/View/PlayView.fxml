@@ -76,7 +76,7 @@
    </bottom>
    <center>
        <Pane fx:id="mazePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <MazeDisplayControl fx:id="mazeDisplayControl" height="200" nodeOrientation="INHERIT" width="450" />
+           <MazeDisplayControl fx:id="mazeDisplayControl" height="200.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" width="450.0" />
        </Pane>
    </center>
 </BorderPane>

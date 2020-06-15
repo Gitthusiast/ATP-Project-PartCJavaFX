@@ -31,9 +31,7 @@ public class MazeDisplayControl extends Canvas {
 
     }
 
-    public void setSolutionList(ArrayList<int[]> solutionList) {
-        this.solutionList = solutionList;
-    }
+    public void setSolutionList(ArrayList<int[]> solutionList) { this.solutionList = solutionList; }
 
     public void drawMaze(){
 
