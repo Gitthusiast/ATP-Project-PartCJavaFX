@@ -4,9 +4,7 @@ import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -72,6 +70,7 @@ public class PlayViewController extends AView implements Observer {
             displayMaze(viewModel.getMaze());
             generateMazeButton.setDisable(false);
             saveMenuOption.setDisable(false);
+            showSolutionButton.setDisable(false);
         }
     }
 
@@ -96,7 +95,7 @@ public class PlayViewController extends AView implements Observer {
 
             stage.show();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

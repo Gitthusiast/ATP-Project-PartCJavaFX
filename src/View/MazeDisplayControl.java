@@ -23,6 +23,7 @@ public class MazeDisplayControl extends Canvas {
         rowNum = maze.length;
         colNum = maze[0].length;
     }
+
     public void setCharcterPosition(int rowIndex, int columnIndex){
 
         charcterPosition[0] = rowIndex;

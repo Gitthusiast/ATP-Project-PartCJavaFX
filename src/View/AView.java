@@ -1,6 +1,7 @@
 package View;
 
 import ViewModel.MyViewModel;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 
