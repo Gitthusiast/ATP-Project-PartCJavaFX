@@ -48,7 +48,7 @@ public class MyModel extends Observable implements IModel{
         MazeSolverServer.start();
     }
 
-    private void stopServers(){
+    public void stopServers(){
 
         MazeGeneratorServer.stop();
         MazeSolverServer.stop();

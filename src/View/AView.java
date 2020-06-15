@@ -2,14 +2,21 @@ package View;
 
 import ViewModel.MyViewModel;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuBar;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Optional;
 
 public abstract class AView implements IView {
 
@@ -52,4 +59,7 @@ public abstract class AView implements IView {
             }
         }
     }
+
+
+
 }

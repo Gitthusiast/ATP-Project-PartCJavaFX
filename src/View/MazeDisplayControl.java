@@ -22,8 +22,8 @@ public class MazeDisplayControl extends Canvas {
         this.maze = maze;
         rowNum = maze.length;
         colNum = maze[0].length;
-        this.solutionList = solutionList;
     }
+
     public void setCharcterPosition(int rowIndex, int columnIndex){
 
         charcterPosition[0] = rowIndex;

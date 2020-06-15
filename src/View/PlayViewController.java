@@ -1,6 +1,7 @@
 package View;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -34,7 +35,7 @@ public class PlayViewController extends AView implements Observer {
     @FXML
     Button mainMenuReturnButton;
 
-    public PlayViewController() {}
+    public PlayViewController() { }
 
     public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
 
@@ -53,6 +54,7 @@ public class PlayViewController extends AView implements Observer {
 
             displayMaze(viewModel.getMaze());
             generateMazeButton.setDisable(false);
+            showSolutionButton.setDisable(false);
         }
     }
 

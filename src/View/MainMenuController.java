@@ -24,6 +24,7 @@ public class MainMenuController extends AView {
     @FXML
     private Button instructionsButton;
 
+
     public void goToInstructionsMenu(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
