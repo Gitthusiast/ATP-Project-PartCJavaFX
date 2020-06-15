@@ -10,9 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class MainMenuController {
+public class MainMenuController extends AView {
 
-    private MyViewModel viewModel;
     private Scene playViewScene;
     private PlayViewController playViewController;
 
@@ -21,7 +20,6 @@ public class MainMenuController {
     @FXML
     private Button playButton;
 
-    public void setViewModel(MyViewModel viewModel) { this.viewModel = viewModel; }
 
     public void goToInstructionsMenu(ActionEvent actionEvent) {
         try {
@@ -53,7 +51,6 @@ public class MainMenuController {
             }
 
 
-            playViewController.setViewModel(viewModel);
             playViewController.setMainMenuScene(playButton.getScene());
             viewModel.addObserver(playViewController);
 

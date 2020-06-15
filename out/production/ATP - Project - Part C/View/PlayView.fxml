@@ -9,12 +9,12 @@
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar fx:id="menuBar">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveMaze" text="Save" />
                         <MenuItem mnemonicParsing="false" text="Load" />
                   </items>
                 </Menu>
@@ -76,11 +76,7 @@
    </bottom>
    <center>
        <Pane fx:id="mazePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-<<<<<<< HEAD
            <MazeDisplayControl fx:id="mazeDisplayControl" height="200.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" width="450.0" />
-=======
-           <MazeDisplayControl fx:id="mazeDisplayControl" height="200" nodeOrientation="INHERIT" width="450" />
->>>>>>> df0157c2ca4fd47c72cb095dc45545b2c0e51a6e
        </Pane>
    </center>
 </BorderPane>

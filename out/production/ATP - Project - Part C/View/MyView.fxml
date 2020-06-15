@@ -8,12 +8,12 @@
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar fx:id="menuBar">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveMaze" text="Save" />
                         <MenuItem mnemonicParsing="false" text="Load" />
                   </items>
                 </Menu>
