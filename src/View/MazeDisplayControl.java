@@ -52,7 +52,6 @@ public class MazeDisplayControl extends Canvas {
                 }
                 else{
                     graphicsContext.setFill(Color.RED);
-                    //graphicsContext.fillRect(i * cellWidth, j * cellHeight,cellWidth,cellHeight);
                     graphicsContext.fillRect(j * cellWidth, i * cellHeight,cellWidth,cellHeight);
                 }
             }

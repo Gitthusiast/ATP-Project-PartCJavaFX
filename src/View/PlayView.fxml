@@ -5,7 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#KeyPressed" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            onKeyPressed="#KeyPressed"
+            fx:controller="View.PlayViewController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -13,9 +15,9 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" onAction="#saveMaze" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Load" />
+                    <MenuItem mnemonicParsing="false" onAction="#generateMaze" text="New" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadMaze" text="Load" />
+                        <MenuItem fx:id="saveMenuOption" disable="true" mnemonicParsing="false" onAction="#saveMaze" text="Save" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Options">
@@ -23,9 +25,12 @@
                     <MenuItem mnemonicParsing="false" text="Properties..." />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Exit" />
-                  <Menu mnemonicParsing="false" text="Help" />
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#goToInstructionsMenu" text="Instructions" />
+                     </items></Menu>
                   <Menu mnemonicParsing="false" text="About" />
+                <Menu mnemonicParsing="false" text="Exit" />
               </menus>
             </MenuBar>
             <HBox alignment="CENTER">
