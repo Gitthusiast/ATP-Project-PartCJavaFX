@@ -3,6 +3,7 @@ package ViewModel;
 import Model.IModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class MyViewModel extends Observable implements Observer {
     private int[] startPosition;
     private int[] goalPosition;
     private StringProperty currentPosition;
+    private Image chosenVirus;
 
     public MyViewModel(IModel model) {
 
@@ -82,6 +84,14 @@ public class MyViewModel extends Observable implements Observer {
      */
     public StringProperty currentPositionProperty() {
         return currentPosition;
+    }
+
+    public Image getChosenVirus() {
+        return chosenVirus;
+    }
+
+    public void setChosenVirus(Image chosenVirus) {
+        this.chosenVirus = chosenVirus;
     }
 
     /**

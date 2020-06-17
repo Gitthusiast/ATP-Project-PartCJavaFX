@@ -1,9 +1,8 @@
 package View;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -15,7 +14,15 @@ public class MazeDisplayControl extends Canvas {
     private int[][] maze;
     private boolean showSolution = false;
     private ArrayList<int[]> solutionList;
-    int[] charcterPosition = new int[2];
+    private final int[] characterPosition = new int[2];
+    private Image wallImage;
+    private Image pathImage;
+    private Image characterImage;
+    private Image goalImage;
+
+
+
+
 
 
     public void setMaze(int[][] maze) {
@@ -26,12 +33,20 @@ public class MazeDisplayControl extends Canvas {
 
     public void setCharcterPosition(int rowIndex, int columnIndex){
 
-        charcterPosition[0] = rowIndex;
-        charcterPosition[1] = columnIndex;
+        characterPosition[0] = rowIndex;
+        characterPosition[1] = columnIndex;
 
     }
 
     public void setSolutionList(ArrayList<int[]> solutionList) { this.solutionList = solutionList; }
+
+    public void setWallImage(Image wallImage) { this.wallImage = wallImage; }
+
+    public void setPathImage(Image pathImage) { this.pathImage = pathImage; }
+
+    public void setCharacterImage(Image characterImage) { this.characterImage = characterImage; }
+
+    public void setGoalImage(Image goalImage) { this.goalImage = goalImage; }
 
     public void drawMaze(){
 
@@ -69,7 +84,7 @@ public class MazeDisplayControl extends Canvas {
         }
 
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(charcterPosition[1] * cellWidth,charcterPosition[0] * cellHeight, cellWidth, cellHeight);
+        graphicsContext.fillRect(characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);
 
 
 
