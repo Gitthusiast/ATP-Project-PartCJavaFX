@@ -14,14 +14,6 @@
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-<<<<<<< HEAD
-=======
-          <Menu mnemonicParsing="false" text="Exit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
->>>>>>> c9cbeebdd968c23e25dbf82f5dfe19b751e40744
             <Menu mnemonicParsing="false" text="About">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
