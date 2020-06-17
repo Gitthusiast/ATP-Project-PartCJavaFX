@@ -3,6 +3,7 @@ package ViewModel;
 import Model.IModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
@@ -16,13 +17,14 @@ public class MyViewModel extends Observable implements Observer {
     private IModel model;
     private int characterRow;
     private int characterColumn;
-    public StringProperty characterRowInput;
-    public StringProperty characterColumnInput;
+    private int[] startPosition;
+    private int[] goalPosition;
+    private StringProperty currentPosition;
+    private Image chosenVirus;
 
     public MyViewModel(IModel model) {
 
-        characterRowInput = new SimpleStringProperty();
-        characterColumnInput = new SimpleStringProperty();
+        currentPosition  = new SimpleStringProperty(this,"currentPosition", "0,0");
         this.model = model;
     }
 
@@ -42,23 +44,75 @@ public class MyViewModel extends Observable implements Observer {
             int[] currentPosition = model.getCurrentPosition();
             characterRow = currentPosition[0];
             characterColumn = currentPosition[1];
+            this.currentPosition.set(characterRow + "," + characterColumn);
 
-            characterRowInput.set(characterRow + "");
-            characterColumnInput.set(characterColumn + "");
+            if (arg instanceof String && arg.equals("generatedMaze")){
 
-            setChanged();
-            notifyObservers();
+                startPosition = model.getStartPosition();
+                goalPosition = model.getGoalPosition();
+
+                setChanged();
+                notifyObservers("generatedMaze");
+            }
+            else if (arg instanceof String && arg.equals("movedCharacter")){
+
+                setChanged();
+
+                if (characterRow == goalPosition[0] && characterColumn == goalPosition[1])
+                    notifyObservers("goalReached");
+                else
+                    notifyObservers("movedCharacter");
+            }
+
+
+
         }
 
     }
 
+
+    public void setCurrentPosition(String currentPosition) {
+        this.currentPosition.set(currentPosition);
+    }
+
+    public String getCurrentPosition() {
+        return currentPosition.get();
+    }
+
     /**
-     * Retrieves a maze from the model.
-     * @param rowNumber number of rows.
-     * @param columnNumber number of columns.
-     * @return 2-d int array representation of a maze
+     * Current position's string is of the form - "{row},{column}".
      */
-    public int[][] generateMaze(int rowNumber, int columnNumber){ return model.generateMaze(rowNumber, columnNumber); }
+    public StringProperty currentPositionProperty() {
+        return currentPosition;
+    }
+
+    public Image getChosenVirus() {
+        return chosenVirus;
+    }
+
+    public void setChosenVirus(Image chosenVirus) {
+        this.chosenVirus = chosenVirus;
+    }
+
+    /**
+     * Retrieves a maze from the model if given parameters are valid or notifies if are not valid.
+     * Parameters are valid is string representing integer between 2 to 100.
+     * @param sRowNumber number of rows.
+     * @param sColumnNumber number of columns.
+     */
+    public void generateMaze(String sRowNumber, String sColumnNumber){
+
+        if (isValidInteger(sRowNumber) && isValidInteger(sColumnNumber)) {
+
+            int rowNumber = Integer.parseInt(sRowNumber);
+            int columnNumber = Integer.parseInt(sColumnNumber);
+            model.generateMaze(rowNumber, columnNumber);
+        }
+        else {
+            setChanged();
+            notifyObservers("notValidInputs");
+        }
+}
 
     /**
      * Retrieves the current maze's solution.
@@ -94,6 +148,9 @@ public class MyViewModel extends Observable implements Observer {
             case NUMPAD9:
                 movementCode = TOP_RIGHT;
                 break;
+            default:
+                movementCode = DEAFULT;
+                break;
         }
         return movementCode;
     }
@@ -114,4 +171,35 @@ public class MyViewModel extends Observable implements Observer {
      * @param characterColumn
      */
     public void updateMaze(byte[] decompressedMaze, int characterRow, int characterColumn) { model.updateMaze(decompressedMaze , characterRow, characterColumn); }
+
+    /**
+     * Checks if a given string is representing a non-negative integer value in the radix of 10.
+     * @param s String to be evaluated.
+     * @return True if string is representing a non-negative integer value in the radix of 10, else false.
+     */
+    private static boolean isInteger(String s) {
+        if(s.isEmpty()) return false;
+        for(int i = 0; i < s.length(); i++) {
+            if(i == 0 && s.charAt(i) == '-') {
+                if(s.length() == 1) return false;
+                else continue;
+            }
+            if(Character.digit(s.charAt(i),10) < 0) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validates text field user input.
+     * @param s input.
+     * @return True if is an integer between 2 to 100.
+     */
+    public boolean isValidInteger(String s){
+
+        if (!isInteger(s)) return false;
+
+        int sConverted = Integer.parseInt(s);
+        return sConverted >= 2 && sConverted <= 100;
+    }
+
 }

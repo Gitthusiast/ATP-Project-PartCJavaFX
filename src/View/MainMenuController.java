@@ -7,23 +7,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class MainMenuController extends AView {
 
     private Scene playViewScene;
-    private Scene instructionsScene;
 
     private PlayViewController playViewController;
-    private InstructionsController instructionsController;
 
     public MainMenuController() { }
 
     @FXML
     private Button playButton;
-    @FXML
-    private Button instructionsButton;
 
 
     public void goToPlayView(ActionEvent actionEvent) {

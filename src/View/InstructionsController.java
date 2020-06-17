@@ -36,7 +36,7 @@ public class InstructionsController extends AView {
             menuWindow.setHeight(instructionsHeight);
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

@@ -93,7 +93,7 @@ public class MyModel extends Observable implements IModel{
             return null;
 
         setChanged();
-        notifyObservers();
+        notifyObservers("generatedMaze");
 
         return maze.getMaze();
     }
@@ -170,7 +170,7 @@ public class MyModel extends Observable implements IModel{
 
         int[] position = new int[2];
         position[0] = maze.getStartPosition().getRowIndex();
-        position[1] = maze.getGoalPosition().getColumnIndex();
+        position[1] = maze.getStartPosition().getColumnIndex();
         return position;
     }
 
@@ -185,7 +185,7 @@ public class MyModel extends Observable implements IModel{
     public int[] getGoalPosition() {
 
         int[] position = new int[2];
-        position[0] = maze.getStartPosition().getRowIndex();
+        position[0] = maze.getGoalPosition().getRowIndex();
         position[1] = maze.getGoalPosition().getColumnIndex();
         return position;
     }
@@ -265,10 +265,12 @@ public class MyModel extends Observable implements IModel{
                     characterColumn++;
                 }
                 break;
+            default:
+                break;
         }
 
         setChanged();
-        notifyObservers();
+        notifyObservers("movedCharacter");
     }
 
     /**
@@ -294,6 +296,6 @@ public class MyModel extends Observable implements IModel{
         this.characterColumn = characterColumn;
 
         setChanged();
-        notifyObservers();
+        notifyObservers("generatedMaze");
     }
 }

@@ -31,7 +31,7 @@
          <items>
             <ImageView fitHeight="188.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@/resources/Images/arrows.png" />
+                  <Image url="@/resources/Images/mousekeys.gif" />
                </image>
             </ImageView>
             <Label contentDisplay="TEXT_ONLY" prefHeight="165.0" prefWidth="491.0" text="Hello young virus, welcome to the real world.&#10;Your big brother Covid19 is infecting the whole world. In order to become as great as him you shoud train.&#10;You need to find your way out of the maze. Your score will be saved, once you are ready YOU WILL INFECT THE WORLD.&#10;But first, focus on reaching to the lungs - the most susceptible organ. Use your numpad to move within the maze. Click Play, then generate  a maze to start the game.&#10;If you give up you can see the answer by pressing the &quot;Show Solution&quot; button.&#10;GOOD LUCK AND MAY THE INFECTION RATES BE WITH YOU." wrapText="true" />

@@ -37,7 +37,7 @@ public class AboutController {
             menuWindow.setHeight(instructionsHeight);
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

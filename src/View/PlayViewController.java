@@ -2,26 +2,28 @@ package View;
 
 import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
+
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 import javafx.stage.Window;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
-public class PlayViewController extends AView implements Observer {
+public class PlayViewController extends AView implements Observer, Initializable {
 
     private Scene mainMenuScene;
     private MainMenuController mainMenuController;
@@ -42,6 +44,8 @@ public class PlayViewController extends AView implements Observer {
     private Button mainMenuReturnButton;
     @FXML
     private MenuItem saveMenuOption;
+    @FXML
+    private Label label_currentPosition;
 
     public PlayViewController() {
 
@@ -49,6 +53,22 @@ public class PlayViewController extends AView implements Observer {
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("MAZE file (*.maze)", "*.maze");
         fileChooser.getExtensionFilters().add(extensionFilter);
     }
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        label_currentPosition.textProperty().bind(Bindings.concat("Position: (", viewModel.currentPositionProperty(), ")") );
+    }
+
+
 
     public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
 
@@ -67,10 +87,47 @@ public class PlayViewController extends AView implements Observer {
     public void update(Observable o, Object arg) {
         if(o == viewModel){
 
-            displayMaze(viewModel.getMaze());
-            generateMazeButton.setDisable(false);
-            saveMenuOption.setDisable(false);
-            showSolutionButton.setDisable(false);
+            if (arg instanceof String && arg.equals("generatedMaze")){
+
+                displayMaze(viewModel.getMaze());
+                generateMazeButton.setDisable(false);
+                showSolutionButton.setDisable(false);
+                saveMenuOption.setDisable(false);
+
+                solutionList = null;
+                mazeDisplayControl.setShowSolution(false);
+                showSolutionButton.setText("Show Solution");
+
+            }
+            else if (arg instanceof String && arg.equals("notValidInputs")) {
+
+                generateMazeButton.setDisable(false);
+
+                if (solutionList != null)
+                    showSolutionButton.setDisable(false);
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid parameter");
+                alert.setContentText("Wrong parameter received! Please enter an integer value between 2 and 100");
+                alert.showAndWait();
+            }
+            else if (arg instanceof String && arg.equals("movedCharacter")){
+                displayMaze(viewModel.getMaze());
+            }
+            else if (arg instanceof String && arg.equals("goalReached")){
+
+                displayMaze(viewModel.getMaze());
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Congratulations");
+                alert.setHeaderText("You Win!");
+                alert.setContentText(
+                        "You have managed to infect the whole body!\n" +
+                        "You have managed to prove yourself as a severe, highly infective and extremely lethal virus. This unsuspecting human had no chance against you.\n" +
+                        "But there are still other humans to eradicate. Now set a bigger maze and keep practicing.");
+                alert.showAndWait();
+
+            }
         }
         //disable All buttons
     }
@@ -105,53 +162,12 @@ public class PlayViewController extends AView implements Observer {
      */
     public void generateMaze(ActionEvent actionEvent){
 
-        int rowNumber, columnNumber;
 
-        if(isValidInteger(textField_rowNumber.getText()) && isValidInteger(textField_columnNumber.getText())){
+        generateMazeButton.setDisable(true);
+        showSolutionButton.setDisable(true);
 
-            generateMazeButton.setDisable(true);
+        viewModel.generateMaze(textField_rowNumber.getText(), textField_columnNumber.getText());
 
-            solutionList = null;
-            mazeDisplayControl.setShowSolution(false);
-            showSolutionButton.setText("Show Solution");
-
-            rowNumber = Integer.parseInt(textField_rowNumber.getText());
-            columnNumber = Integer.parseInt(textField_columnNumber.getText());
-            viewModel.generateMaze(rowNumber, columnNumber);
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid parameter");
-            alert.setContentText("Wrong parameter received! Please enter an integer value between 2 and 100");
-            alert.showAndWait();
-        }
-
-    }
-
-
-    private static boolean isInteger(String s) {
-        if(s.isEmpty()) return false;
-        for(int i = 0; i < s.length(); i++) {
-            if(i == 0 && s.charAt(i) == '-') {
-                if(s.length() == 1) return false;
-                else continue;
-            }
-            if(Character.digit(s.charAt(i),10) < 0) return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validates text field user input.
-     * @param s input.
-     * @return True if is an integer between 2 to 100.
-     */
-    public boolean isValidInteger(String s){
-
-        if (!isInteger(s)) return false;
-
-        int sConverted = Integer.parseInt(s);
-        return sConverted >= 2 && sConverted <= 100;
     }
 
     public void showSolution(){

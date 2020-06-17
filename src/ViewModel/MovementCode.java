@@ -6,6 +6,7 @@ public enum MovementCode {
     DOWN(2),
     BOTTOM_RIGHT(3),
     LEFT(4),
+    DEAFULT(5),
     RIGHT(6),
     TOP_LEFT(7),
     UP(8),
