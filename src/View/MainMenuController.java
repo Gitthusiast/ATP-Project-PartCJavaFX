@@ -7,56 +7,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 public class MainMenuController extends AView {
 
     private Scene playViewScene;
-    private Scene instructionsScene;
 
     private PlayViewController playViewController;
-    private InstructionsController instructionsController;
 
     public MainMenuController() { }
 
     @FXML
     private Button playButton;
-    @FXML
-    private Button instructionsButton;
 
-    @FXML
-    public void goToInstructionsMenu(ActionEvent actionEvent) {
-
-        Stage stage;
-
-        try {
-
-            if (actionEvent.getSource() instanceof Node){
-
-                stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            }
-            else{
-                stage = (Stage) ((MenuItem) actionEvent.getSource()).getParentPopup().getScene().getWindow();
-            }
-            Scene mainMenuScene = instructionsButton.getScene();
-
-            if(instructionsScene == null){
-
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getResource("Instructions.fxml").openStream());
-                instructionsController = fxmlLoader.getController();
-                instructionsScene = new Scene(root,mainMenuScene.getWidth(), mainMenuScene.getHeight());
-            }
-
-            instructionsController.setMainMenuScene(mainMenuScene);
-
-            stage.setScene(instructionsScene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void goToPlayView(ActionEvent actionEvent) {
         try {
@@ -86,7 +49,6 @@ public class MainMenuController extends AView {
             e.printStackTrace();
         }
     }
-
 
 
 }

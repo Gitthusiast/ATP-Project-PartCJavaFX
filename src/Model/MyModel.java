@@ -6,6 +6,7 @@ import IO.MyDecompressorInputStream;
 import Server.Server;
 import Server.ServerStrategyGenerateMaze;
 import Server.ServerStrategySolveSearchProblem;
+import ViewModel.MovementCode;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
 import algorithms.search.Solution;
@@ -194,38 +195,37 @@ public class MyModel extends Observable implements IModel{
      * @param step movement direction
      */
     @Override
-    public void moveCharacter(KeyCode step) {
+    public void moveCharacter(MovementCode step) {
 
         int[][] aMaze = maze.getMaze();
-        boolean steppedOnAWall = false;
 
         switch (step){
 
-            case NUMPAD8: //UP
+            case UP: //UP
                 characterRow --;
                 if(characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
                     characterRow++; //we don't want to allow illegal moves
                 }
                 break;
-            case NUMPAD6: //RIGHT
+            case RIGHT: //RIGHT
                 characterColumn++;
                 if(characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
                     characterColumn--;
                 }
                 break;
-            case NUMPAD2: //DOWN
+            case DOWN: //DOWN
                 characterRow++;
                 if(characterRow >= maze.getRowNumber() || aMaze[characterRow][characterColumn] == 1){
                     characterRow--;
                 }
                 break;
-            case NUMPAD4: //LEFT
+            case LEFT: //LEFT
                 characterColumn--;
                 if(characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
                     characterColumn++;
                 }
                 break;
-            case NUMPAD7: //UP LEFT
+            case TOP_LEFT: //UP LEFT
                 characterColumn--;
                 characterRow--;
 
@@ -235,7 +235,7 @@ public class MyModel extends Observable implements IModel{
                     characterRow++;
                 }
                 break;
-            case NUMPAD9: //UP RIGHT
+            case TOP_RIGHT: //UP RIGHT
                 characterRow--;
                 characterColumn++;
 
@@ -245,7 +245,7 @@ public class MyModel extends Observable implements IModel{
                     characterColumn--;
                 }
                 break;
-            case NUMPAD3: //DOWN RIGHT
+            case BOTTOM_RIGHT: //DOWN RIGHT
                 characterColumn++;
                 characterRow++;
 
@@ -255,7 +255,7 @@ public class MyModel extends Observable implements IModel{
                     characterRow--;
                 }
                 break;
-            case NUMPAD1: //DOWN LEFT
+            case BOTTOM_LEFT: //DOWN LEFT
                 characterRow++;
                 characterColumn--;
 
@@ -264,6 +264,8 @@ public class MyModel extends Observable implements IModel{
                     characterRow--;
                     characterColumn++;
                 }
+                break;
+            default:
                 break;
         }
 

@@ -129,6 +129,7 @@ public class PlayViewController extends AView implements Observer, Initializable
 
             }
         }
+        //disable All buttons
     }
 
     public void displayMaze(int[][] maze){
@@ -251,6 +252,4 @@ public class PlayViewController extends AView implements Observer, Initializable
         }
     }
 
-    @FXML
-    public void goToInstructionsMenu(ActionEvent actionEvent){ mainMenuController.goToInstructionsMenu(actionEvent); }
 }
