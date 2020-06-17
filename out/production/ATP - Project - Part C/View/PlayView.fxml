@@ -20,15 +20,21 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Options">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Properties..." />
+                    <MenuItem mnemonicParsing="false" onAction="#ViewConfigurations" text="Properties..." />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#goToInstructionsMenu" text="Instructions" />
+                        <MenuItem mnemonicParsing="false" onAction="#goToInstructions" text="Instructions" />
                      </items></Menu>
-                  <Menu mnemonicParsing="false" text="About" />
-                <Menu mnemonicParsing="false" text="Exit" />
+                  <Menu mnemonicParsing="false" text="About">
+                     <items>
+                        <MenuItem mnemonicParsing="false"  onAction="#goToAbout" text="More about us" />
+                     </items></Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#callUponExit" text="Exit Game" />
+                     </items></Menu>
               </menus>
             </MenuBar>
             <HBox alignment="CENTER">

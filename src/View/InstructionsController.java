@@ -10,24 +10,24 @@ import javafx.stage.Window;
 
 public class InstructionsController extends AView {
 
-    Scene mainMenuScene;
+    Scene lastScene;
 
     @FXML
-    Button returnToMainMenuButton;
+    Button goBackButton;
 
-    public void setMainMenuScene(Scene mainMenuScene) {
-        this.mainMenuScene = mainMenuScene;
+    public void setLastScene(Scene lastScene) {
+        this.lastScene = lastScene;
     }
 
     public InstructionsController() {}
 
-    public void goToMainMenu(ActionEvent actionEvent) {
+    public void goBack(ActionEvent actionEvent) {
         try {
-            double instructionsWidth = returnToMainMenuButton.getScene().getWindow().getWidth();
-            double instructionsHeight = returnToMainMenuButton.getScene().getWindow().getHeight();
+            double instructionsWidth = goBackButton.getScene().getWindow().getWidth();
+            double instructionsHeight = goBackButton.getScene().getWindow().getHeight();
 
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(mainMenuScene);
+            stage.setScene(lastScene);
             Window menuWindow = stage.getOwner();
 
             stage.show();

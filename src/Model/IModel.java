@@ -1,5 +1,6 @@
 package Model;
 
+import ViewModel.MovementCode;
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.search.ISearchingAlgorithm;
 import javafx.scene.input.KeyCode;
@@ -44,10 +45,10 @@ public interface IModel {
     public int[] getGoalPosition();
 
     /**
-     * Move the character according to KeyCode input.
-     * @param step movement direction
+     * Move the character according to MovementCode input.
+     * @param step enum from the View Model.
      */
-    public void moveCharacter(KeyCode step);
+    public void moveCharacter(MovementCode step);
 
 
     /**

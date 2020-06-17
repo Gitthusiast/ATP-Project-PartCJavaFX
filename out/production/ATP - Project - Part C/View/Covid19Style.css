@@ -10,3 +10,7 @@ Indian Red #D3686A
 
     -fx-background-color: radial-gradient(radius 20px, hotpink, lightpink);
 }
+
+.sound-button{
+    /*-fx-background-image: url("/resources/Images/mute.png");*/
+}

@@ -5,9 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            onKeyPressed="#KeyPressed"
-            fx:controller="View.PlayViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#KeyPressed" prefHeight="600.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PlayViewController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -22,15 +20,21 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Options">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Properties..." />
+                    <MenuItem mnemonicParsing="false" onAction="#ViewConfigurations" text="Properties..." />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#goToInstructionsMenu" text="Instructions" />
+                        <MenuItem mnemonicParsing="false" onAction="#goToInstructions" text="Instructions" />
                      </items></Menu>
-                  <Menu mnemonicParsing="false" text="About" />
-                <Menu mnemonicParsing="false" text="Exit" />
+                  <Menu mnemonicParsing="false" text="About">
+                     <items>
+                        <MenuItem mnemonicParsing="false"  onAction="#goToAbout" text="More about us" />
+                     </items></Menu>
+                <Menu mnemonicParsing="false" text="Exit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#callUponExit" text="Exit Game" />
+                     </items></Menu>
               </menus>
             </MenuBar>
             <HBox alignment="CENTER">

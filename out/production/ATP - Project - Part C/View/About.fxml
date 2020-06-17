@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AboutController">
@@ -12,21 +11,11 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <TextArea prefHeight="200.0" prefWidth="200.0" text="This is Yair" />
-                  <ImageView fitHeight="136.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/Images/Voldemort.png" />
-                     </image>
-                  </ImageView>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <TextArea prefHeight="200.0" prefWidth="200.0" text="And this is Gila&#10;&#10;Presenting fun with covid&#10;&#10;Enjoy&#10;" />
-                  <ImageView fitHeight="172.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/Images/gila.jpg" />
-                     </image>
-                  </ImageView>
                </children>
             </HBox>
          </children>
@@ -36,7 +25,7 @@
       </VBox>
    </center>
    <bottom>
-      <Button fx:id="returnToMainMenuButton" mnemonicParsing="false" onAction="#goToMainMenu" text="Return to main menu" BorderPane.alignment="BOTTOM_RIGHT">
+      <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" text="Go Back" BorderPane.alignment="BOTTOM_RIGHT">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>

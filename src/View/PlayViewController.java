@@ -72,6 +72,7 @@ public class PlayViewController extends AView implements Observer {
             saveMenuOption.setDisable(false);
             showSolutionButton.setDisable(false);
         }
+        //disable All buttons
     }
 
     public void displayMaze(int[][] maze){
@@ -234,8 +235,5 @@ public class PlayViewController extends AView implements Observer {
             }
         }
     }
-
-    @FXML
-    public void goToInstructionsMenu(ActionEvent actionEvent){ mainMenuController.goToInstructionsMenu(actionEvent); }
 
 }
