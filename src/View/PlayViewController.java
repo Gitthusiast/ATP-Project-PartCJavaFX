@@ -4,14 +4,19 @@ import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableNumberValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -26,9 +31,12 @@ import java.util.ResourceBundle;
 public class PlayViewController extends AView implements Observer, Initializable {
 
     private Scene mainMenuScene;
-    private MainMenuController mainMenuController;
     private ArrayList<int[]> solutionList = null;
     private FileChooser fileChooser;
+    private Image wallImage;
+    private Image pathImage;
+    private Image goalImage;
+    private Image solutionPathImage;
 
     @FXML
     private TextField textField_rowNumber;
@@ -46,12 +54,16 @@ public class PlayViewController extends AView implements Observer, Initializable
     private MenuItem saveMenuOption;
     @FXML
     private Label label_currentPosition;
+    @FXML
+    private Pane mazePane;
 
     public PlayViewController() {
 
         fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("MAZE file (*.maze)", "*.maze");
         fileChooser.getExtensionFilters().add(extensionFilter);
+
+
     }
 
     /**
@@ -66,13 +78,27 @@ public class PlayViewController extends AView implements Observer, Initializable
     public void initialize(URL location, ResourceBundle resources) {
 
         label_currentPosition.textProperty().bind(Bindings.concat("Position: (", viewModel.currentPositionProperty(), ")") );
+
+        wallImage = new Image("Images/vein-tissue.jpeg");
+        pathImage = new Image("Images/bloodCells2.jpeg");
+        goalImage = new Image("Images/lungs.png");
+        solutionPathImage = new Image("Images/solution.png");
+
+        mazeDisplayControl.setWallImage(wallImage);
+        mazeDisplayControl.setPathImage(pathImage);
+        mazeDisplayControl.setGoalImage(goalImage);
+        mazeDisplayControl.setSolutionPathImage(solutionPathImage);
+
+        mazeDisplayControl.setBackgroundPathColor(Color.web("#DE9291"));
+        mazeDisplayControl.setBackgroundWallColor(Color.web("#DE9291"));
+
+        mazeDisplayControl.widthProperty().bind(mazePane.widthProperty());
+        mazeDisplayControl.heightProperty().bind(mazePane.heightProperty());
     }
 
 
 
     public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
-
-    public void setMainMenuController(MainMenuController mainMenuController) { this.mainMenuController = mainMenuController; }
 
     /**
      * This method is called whenever the observed object is changed. An
@@ -89,7 +115,7 @@ public class PlayViewController extends AView implements Observer, Initializable
 
             if (arg instanceof String && arg.equals("generatedMaze")){
 
-                displayMaze(viewModel.getMaze());
+                displayMaze();
                 generateMazeButton.setDisable(false);
                 showSolutionButton.setDisable(false);
                 saveMenuOption.setDisable(false);
@@ -112,11 +138,11 @@ public class PlayViewController extends AView implements Observer, Initializable
                 alert.showAndWait();
             }
             else if (arg instanceof String && arg.equals("movedCharacter")){
-                displayMaze(viewModel.getMaze());
+                displayMaze();
             }
             else if (arg instanceof String && arg.equals("goalReached")){
 
-                displayMaze(viewModel.getMaze());
+                displayMaze();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Congratulations");
@@ -132,9 +158,11 @@ public class PlayViewController extends AView implements Observer, Initializable
         //disable All buttons
     }
 
-    public void displayMaze(int[][] maze){
-        mazeDisplayControl.setMaze(maze);
+    public void displayMaze(){
+        mazeDisplayControl.setMaze(viewModel.getMaze());
         mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
+        mazeDisplayControl.setCharacterImage(AView.characterImageHolder.getImage());
+        mazeDisplayControl.setGoalPosition(viewModel.getGoalRow(), viewModel.getGoalColumn());
         mazeDisplayControl.drawMaze();
     }
 

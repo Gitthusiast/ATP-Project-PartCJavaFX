@@ -202,4 +202,7 @@ public class MyViewModel extends Observable implements Observer {
         return sConverted >= 2 && sConverted <= 100;
     }
 
+    public int getGoalRow() { return model.getGoalPosition()[0];}
+
+    public int getGoalColumn() { return model.getGoalPosition()[1];}
 }

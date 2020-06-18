@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -28,6 +29,8 @@ public abstract class AView implements IView {
     protected static MyViewModel viewModel;
     protected static Stage pirmaryStage;
 
+    protected static ImageView characterImageHolder;
+
     public static Stage getPirmaryStage() {
         return pirmaryStage;
     }
@@ -39,7 +42,7 @@ public abstract class AView implements IView {
     @FXML
     protected MenuBar menuBar;
 
-    public AView() {}
+    public AView() { characterImageHolder = new ImageView(); }
 
     public static MyViewModel getViewModel() {
         return viewModel;
