@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
+<BorderPane id="mainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -46,7 +46,7 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="chooseCharacterButton" mnemonicParsing="false" text="Choose character" />
+            <Button fx:id="chooseCharacterButton" mnemonicParsing="false" onAction="#goToChooseView" text="Choose character" />
             <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="muteButton" mnemonicParsing="false" text="Mute" />
          </children>

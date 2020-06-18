@@ -28,12 +28,11 @@ public class InstructionsController extends AView {
 
             Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(lastScene);
-            Window menuWindow = stage.getOwner();
 
             stage.show();
 
-            menuWindow.setWidth(instructionsWidth);
-            menuWindow.setHeight(instructionsHeight);
+            stage.setWidth(instructionsWidth);
+            stage.setHeight(instructionsHeight);
 
         } catch (Exception e) {
             e.printStackTrace();

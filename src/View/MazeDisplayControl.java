@@ -15,15 +15,16 @@ public class MazeDisplayControl extends Canvas {
     private boolean showSolution = false;
     private ArrayList<int[]> solutionList;
     private final int[] characterPosition = new int[2];
+    private final int[] goalPosition = new int[2];
+
     private Image wallImage;
     private Image pathImage;
     private Image characterImage;
     private Image goalImage;
+    private Image solutionPathImage;
 
-
-
-
-
+    private Color backgroundWallColor;
+    private Color backgroundPathColor;
 
     public void setMaze(int[][] maze) {
         this.maze = maze;
@@ -38,6 +39,13 @@ public class MazeDisplayControl extends Canvas {
 
     }
 
+    public void setGoalPosition(int rowIndex, int columnIndex){
+
+        goalPosition[0] = rowIndex;
+        goalPosition[1] = columnIndex;
+
+    }
+
     public void setSolutionList(ArrayList<int[]> solutionList) { this.solutionList = solutionList; }
 
     public void setWallImage(Image wallImage) { this.wallImage = wallImage; }
@@ -47,6 +55,12 @@ public class MazeDisplayControl extends Canvas {
     public void setCharacterImage(Image characterImage) { this.characterImage = characterImage; }
 
     public void setGoalImage(Image goalImage) { this.goalImage = goalImage; }
+
+    public void setSolutionPathImage(Image solutionPathImage) { this.solutionPathImage = solutionPathImage; }
+
+    public void setBackgroundWallColor(Color backgroundWallColor) { this.backgroundWallColor = backgroundWallColor; }
+
+    public void setBackgroundPathColor(Color backgroundPathColor) { this.backgroundPathColor = backgroundPathColor; }
 
     public void drawMaze(){
 
@@ -62,29 +76,35 @@ public class MazeDisplayControl extends Canvas {
         for(int i=0; i<rowNum; i++){
             for(int j=0; j<colNum; j++){
                 if(maze[i][j] == 1) {
-                    graphicsContext.setFill(Color.BROWN);
+                    graphicsContext.setFill(backgroundWallColor);
                     graphicsContext.fillRect(j * cellWidth, i * cellHeight,cellWidth,cellHeight);
+                    graphicsContext.drawImage(wallImage, j * cellWidth, i * cellHeight,cellWidth,cellHeight);
                 }
                 else{
-                    graphicsContext.setFill(Color.RED);
+                    graphicsContext.setFill(backgroundPathColor);
                     graphicsContext.fillRect(j * cellWidth, i * cellHeight,cellWidth,cellHeight);
+                    graphicsContext.drawImage(pathImage, j * cellWidth, i * cellHeight,cellWidth,cellHeight);
                 }
             }
         }
 
+
         if (showSolution){
-            graphicsContext.setFill(Color.AZURE);
 
             for (int[] position : solutionList) {
 
-                graphicsContext.setFill(Color.YELLOW);
-                graphicsContext.fillRect( position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);
+                /*graphicsContext.setFill(Color.YELLOW);
+                graphicsContext.fillRect( position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);*/
+                graphicsContext.drawImage(solutionPathImage, position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);
             }
 
         }
 
-        graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);
+        graphicsContext.drawImage(goalImage, goalPosition[1] * cellWidth, goalPosition[0] * cellHeight, cellWidth, cellHeight);
+
+        /*graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillRect(characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);*/
+        graphicsContext.drawImage(characterImage, characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);
 
 
 

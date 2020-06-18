@@ -14,3 +14,51 @@ Indian Red #D3686A
 .sound-button{
     /*-fx-background-image: url("/resources/Images/mute.png");*/
 }
+
+#mainMenu{
+
+    -fx-background-image: url("/resources/Images/redCovidLogo.jpeg");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: stretch;
+}
+
+#aboutMenu{
+
+    -fx-background-image: url("/resources/Images/whiteCovidLogo.jpeg");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: stretch;
+}
+
+#instructionsMenu{
+
+    -fx-background-image: url("/resources/Images/covidInstructions.jpeg");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: stretch;
+}
+
+
+#instructionsText{
+
+    -fx-font-size: 150%;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#playMenu{
+
+    -fx-background-image: url("/resources/Images/redBackground1.jfif");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: stretch;
+}
+
+#chooseMenu{
+
+    -fx-background-image: url("/resources/Images/redBackground2.jfif");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: stretch;
+}
