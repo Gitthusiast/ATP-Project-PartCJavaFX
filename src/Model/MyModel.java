@@ -167,11 +167,13 @@ public class MyModel extends Observable implements IModel{
      */
     @Override
     public int[] getStartPosition() {
-
-        int[] position = new int[2];
-        position[0] = maze.getStartPosition().getRowIndex();
-        position[1] = maze.getStartPosition().getColumnIndex();
-        return position;
+        if(maze != null){
+            int[] position = new int[2];
+            position[0] = maze.getStartPosition().getRowIndex();
+            position[1] = maze.getStartPosition().getColumnIndex();
+            return position;
+        }
+        return null;
     }
 
 
@@ -184,10 +186,13 @@ public class MyModel extends Observable implements IModel{
     @Override
     public int[] getGoalPosition() {
 
-        int[] position = new int[2];
-        position[0] = maze.getGoalPosition().getRowIndex();
-        position[1] = maze.getGoalPosition().getColumnIndex();
-        return position;
+        if(maze != null){
+            int[] position = new int[2];
+            position[0] = maze.getGoalPosition().getRowIndex();
+            position[1] = maze.getGoalPosition().getColumnIndex();
+            return position;
+        }
+        return null;
     }
 
     /**
@@ -197,91 +202,98 @@ public class MyModel extends Observable implements IModel{
     @Override
     public void moveCharacter(MovementCode step) {
 
-        int[][] aMaze = maze.getMaze();
+        if(maze != null){
+            int[][] aMaze = maze.getMaze();
 
-        switch (step){
+            switch (step){
 
-            case UP: //UP
-                characterRow --;
-                if(characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
-                    characterRow++; //we don't want to allow illegal moves
-                }
-                break;
-            case RIGHT: //RIGHT
-                characterColumn++;
-                if(characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
-                    characterColumn--;
-                }
-                break;
-            case DOWN: //DOWN
-                characterRow++;
-                if(characterRow >= maze.getRowNumber() || aMaze[characterRow][characterColumn] == 1){
-                    characterRow--;
-                }
-                break;
-            case LEFT: //LEFT
-                characterColumn--;
-                if(characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
+                case UP : //UP
+                case ARROW_UP:
+                    characterRow --;
+                    if(characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
+                        characterRow++; //we don't want to allow illegal moves
+                    }
+                    break;
+                case RIGHT: //RIGHT
+                case ARROW_RIGHT:
                     characterColumn++;
-                }
-                break;
-            case TOP_LEFT: //UP LEFT
-                characterColumn--;
-                characterRow--;
+                    if(characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
+                        characterColumn--;
+                    }
+                    break;
+                case DOWN: //DOWN
+                case ARROW_DOWN:
+                    characterRow++;
+                    if(characterRow >= maze.getRowNumber() || aMaze[characterRow][characterColumn] == 1){
+                        characterRow--;
+                    }
+                    break;
+                case LEFT: //LEFT
+                case ARROW_LEFT:
+                    characterColumn--;
+                    if(characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
+                        characterColumn++;
+                    }
+                    break;
+                case TOP_LEFT: //UP LEFT
+                    characterColumn--;
+                    characterRow--;
 
-                if(characterColumn <= -1 || characterRow <= -1 || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow][characterColumn+1]==1 && aMaze[characterRow+1][characterColumn]==1)){
+                    if(characterColumn <= -1 || characterRow <= -1 || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow][characterColumn+1]==1 && aMaze[characterRow+1][characterColumn]==1)){
 
+                        characterColumn++;
+                        characterRow++;
+                    }
+                    break;
+                case TOP_RIGHT: //UP RIGHT
+                    characterRow--;
+                    characterColumn++;
+
+                    if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow][characterColumn-1]==1 && aMaze[characterRow+1][characterColumn]==1)){
+
+                        characterRow++;
+                        characterColumn--;
+                    }
+                    break;
+                case BOTTOM_RIGHT: //DOWN RIGHT
                     characterColumn++;
                     characterRow++;
-                }
-                break;
-            case TOP_RIGHT: //UP RIGHT
-                characterRow--;
-                characterColumn++;
 
-                if(characterRow <= -1 || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow][characterColumn-1]==1 && aMaze[characterRow+1][characterColumn]==1)){
+                    if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow-1][characterColumn]==1 && aMaze[characterRow][characterColumn-1]==1)){
 
+                        characterColumn--;
+                        characterRow--;
+                    }
+                    break;
+                case BOTTOM_LEFT: //DOWN LEFT
                     characterRow++;
                     characterColumn--;
-                }
-                break;
-            case BOTTOM_RIGHT: //DOWN RIGHT
-                characterColumn++;
-                characterRow++;
 
-                if(characterRow >= maze.getRowNumber() || characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow-1][characterColumn]==1 && aMaze[characterRow][characterColumn-1]==1)){
+                    if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow-1][characterColumn]==1 && aMaze[characterRow][characterColumn+1]==1)){
 
-                    characterColumn--;
-                    characterRow--;
-                }
-                break;
-            case BOTTOM_LEFT: //DOWN LEFT
-                characterRow++;
-                characterColumn--;
+                        characterRow--;
+                        characterColumn++;
+                    }
+                    break;
+                default:
+                    break;
+            }
 
-                if(characterRow >= maze.getRowNumber() || characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1 || (aMaze[characterRow-1][characterColumn]==1 && aMaze[characterRow][characterColumn+1]==1)){
-
-                    characterRow--;
-                    characterColumn++;
-                }
-                break;
-            default:
-                break;
+            setChanged();
+            notifyObservers("movedCharacter");
         }
 
-        setChanged();
-        notifyObservers("movedCharacter");
     }
 
     /**
      * @return Return 2-d array containing maze content as 1 and 0 values (1 - wall, 0 - path).
      */
-    public int[][] getMaze(){ return maze.getMaze(); }
+    public int[][] getMaze(){ return maze!=null ? maze.getMaze() : null; }
 
     /**
      * @return Returns the maze as a byte array containing all relevant details.
      */
-    public byte[] getMazeByteArray() { return maze.toByteArray(); }
+    public byte[] getMazeByteArray() { return maze!=null ? maze.toByteArray() : null; }
 
     /**
      * Updates the model with a given maze byte array and current character position.

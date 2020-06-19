@@ -13,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.ResourceBundle;
 public class chooseCharacterController extends AView implements Initializable {
 
     private ArrayList<Image> images;
-    private int currentIndex = 0;
+    private int currentImageIndex = 0;
     Scene mainMenuScene;
 
     @FXML
@@ -68,24 +67,24 @@ public class chooseCharacterController extends AView implements Initializable {
     @FXML
     public void nextLeftImage(MouseEvent mouseEvent){
 
-        if (currentIndex == 0)
-            currentIndex = images.size() - 1;
+        if (currentImageIndex == 0)
+            currentImageIndex = images.size() - 1;
         else
-            currentIndex--;
+            currentImageIndex--;
 
-        chosenImage = images.get(currentIndex);
+        chosenImage = images.get(currentImageIndex);
         chosenImageView.setImage(chosenImage);
     }
 
     @FXML
     public void nextRightImage(MouseEvent mouseEvent){
 
-        if (currentIndex == images.size() - 1)
-            currentIndex = 0;
+        if (currentImageIndex == images.size() - 1)
+            currentImageIndex = 0;
         else
-            currentIndex++;
+            currentImageIndex++;
 
-        chosenImage = images.get(currentIndex);
+        chosenImage = images.get(currentImageIndex);
         chosenImageView.setImage(chosenImage);
 
 

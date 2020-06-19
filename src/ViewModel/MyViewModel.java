@@ -148,6 +148,18 @@ public class MyViewModel extends Observable implements Observer {
             case NUMPAD9:
                 movementCode = TOP_RIGHT;
                 break;
+            case UP:
+                movementCode = ARROW_UP;
+                break;
+            case DOWN:
+                movementCode = ARROW_DOWN;
+                break;
+            case LEFT:
+                movementCode = ARROW_LEFT;
+                break;
+            case RIGHT:
+                movementCode = ARROW_RIGHT;
+                break;
             default:
                 movementCode = DEAFULT;
                 break;
@@ -202,7 +214,7 @@ public class MyViewModel extends Observable implements Observer {
         return sConverted >= 2 && sConverted <= 100;
     }
 
-    public int getGoalRow() { return model.getGoalPosition()[0];}
+    public int getGoalRow() { return model.getGoalPosition()!=null ? model.getGoalPosition()[0] : -1;}
 
-    public int getGoalColumn() { return model.getGoalPosition()[1];}
+    public int getGoalColumn() { return model.getGoalPosition()!=null ? model.getGoalPosition()[1] : -1;}
 }
