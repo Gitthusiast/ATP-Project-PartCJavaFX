@@ -93,17 +93,13 @@ public class MazeDisplayControl extends Canvas {
 
             for (int[] position : solutionList) {
 
-                /*graphicsContext.setFill(Color.YELLOW);
-                graphicsContext.fillRect( position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);*/
                 graphicsContext.drawImage(solutionPathImage, position[1]* cellWidth, position[0] * cellHeight, cellWidth, cellHeight);
             }
 
         }
 
         graphicsContext.drawImage(goalImage, goalPosition[1] * cellWidth, goalPosition[0] * cellHeight, cellWidth, cellHeight);
-
-        /*graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);*/
+        
         graphicsContext.drawImage(characterImage, characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);
 
 

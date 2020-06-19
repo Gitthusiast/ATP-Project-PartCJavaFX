@@ -10,7 +10,11 @@ public enum MovementCode {
     RIGHT(6),
     TOP_LEFT(7),
     UP(8),
-    TOP_RIGHT(9);
+    TOP_RIGHT(9),
+    ARROW_UP(10),
+    ARROW_DOWN(11),
+    ARROW_LEFT(12),
+    ARROW_RIGHT(13);
 
 
     private final int movementCode;

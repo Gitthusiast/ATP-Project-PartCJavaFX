@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -29,11 +30,15 @@ public abstract class AView implements IView {
     protected static MyViewModel viewModel;
     protected static Stage pirmaryStage;
 
-    protected static ImageView characterImageHolder;
+    protected static ImageView characterImageHolder = new ImageView();;
 
     public static Stage getPirmaryStage() {
         return pirmaryStage;
     }
+
+    protected static MediaPlayer mediaPlayer_Dead;
+    protected static MediaPlayer mediaPlayer_Scary;
+    protected static boolean isScaryMusicPlaying;
 
     public static void setPirmaryStage(Stage pirmaryStage) {
         AView.pirmaryStage = pirmaryStage;
@@ -42,7 +47,7 @@ public abstract class AView implements IView {
     @FXML
     protected MenuBar menuBar;
 
-    public AView() { characterImageHolder = new ImageView(); }
+    public AView() {  }
 
     public static MyViewModel getViewModel() {
         return viewModel;

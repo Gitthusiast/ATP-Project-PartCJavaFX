@@ -32,7 +32,7 @@ public class Main extends Application {
         AView.setViewModel(viewModel);
         AView.setPirmaryStage(primaryStage);
         //--------------
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Covid19 End Game");
         primaryStage.setScene(new Scene(root, 800, 700));
         //--------------
         SetStageCloseEvent(primaryStage, model);

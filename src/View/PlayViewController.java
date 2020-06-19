@@ -4,7 +4,6 @@ import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableNumberValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,10 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -115,14 +116,16 @@ public class PlayViewController extends AView implements Observer, Initializable
 
             if (arg instanceof String && arg.equals("generatedMaze")){
 
+                solutionList = null;
+                mazeDisplayControl.setShowSolution(false);
+                showSolutionButton.setText("Show Solution");
+
                 displayMaze();
+
                 generateMazeButton.setDisable(false);
                 showSolutionButton.setDisable(false);
                 saveMenuOption.setDisable(false);
 
-                solutionList = null;
-                mazeDisplayControl.setShowSolution(false);
-                showSolutionButton.setText("Show Solution");
 
             }
             else if (arg instanceof String && arg.equals("notValidInputs")) {
@@ -144,13 +147,40 @@ public class PlayViewController extends AView implements Observer, Initializable
 
                 displayMaze();
 
+                if(mediaPlayer_Dead == null){
+                    Media musicFile = new Media(getClass().getResource("/Mp3/HeartBeatDying.mp3").toString());
+                    mediaPlayer_Dead = new MediaPlayer(musicFile);
+                }
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Congratulations");
                 alert.setHeaderText("You Win!");
                 alert.setContentText(
                         "You have managed to infect the whole body!\n" +
-                        "You have managed to prove yourself as a severe, highly infective and extremely lethal virus. This unsuspecting human had no chance against you.\n" +
-                        "But there are still other humans to eradicate. Now set a bigger maze and keep practicing.");
+                                "You have managed to prove yourself as a severe, highly infective and extremely lethal virus. This unsuspecting human had no chance against you.\n" +
+                                "But there are still other humans to eradicate. Now set a bigger maze and keep practicing.");
+
+                alert.setOnCloseRequest(e ->{
+                    mediaPlayer_Dead.stop();
+                    if(isScaryMusicPlaying)
+                        mediaPlayer_Scary.play();
+                });
+
+                alert.setOnShowing(e ->{
+                    mediaPlayer_Scary.stop();
+                    mediaPlayer_Dead.play();
+                    mediaPlayer_Dead.setVolume(0.07);
+
+                    mediaPlayer_Dead.setOnEndOfMedia(() -> {
+                        if(isScaryMusicPlaying)
+                            mediaPlayer_Scary.play();
+                    });
+
+                });
+
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("Covid19Style.css").toExternalForm());
+                dialogPane.getStyleClass().add("winAlert");
                 alert.showAndWait();
 
             }
@@ -159,11 +189,13 @@ public class PlayViewController extends AView implements Observer, Initializable
     }
 
     public void displayMaze(){
-        mazeDisplayControl.setMaze(viewModel.getMaze());
-        mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
-        mazeDisplayControl.setCharacterImage(AView.characterImageHolder.getImage());
-        mazeDisplayControl.setGoalPosition(viewModel.getGoalRow(), viewModel.getGoalColumn());
-        mazeDisplayControl.drawMaze();
+        if(viewModel.getMaze() != null){
+            mazeDisplayControl.setMaze(viewModel.getMaze());
+            mazeDisplayControl.setCharcterPosition(viewModel.getCharacterRow(), viewModel.getCharacterColumn());
+            mazeDisplayControl.setCharacterImage(AView.characterImageHolder.getImage());
+            mazeDisplayControl.setGoalPosition(viewModel.getGoalRow(), viewModel.getGoalColumn());
+            mazeDisplayControl.drawMaze();
+        }
     }
 
     public void goToMainMenu(ActionEvent actionEvent) {
@@ -224,9 +256,14 @@ public class PlayViewController extends AView implements Observer, Initializable
         mazeDisplayControl.requestFocus();
     }
 
+    public void dragMouse(MouseDragEvent mouseDragEvent) {
+        //mouseClicked(mouseDragEvent);
+        //System.out.println(mouseDragEvent.getEventType());
+    }
+
     public void KeyPressed(KeyEvent keyEvent){
         viewModel.moveCharacter(keyEvent.getCode());
-        //keyEvent.consume();
+        keyEvent.consume();
     }
 
     @FXML
@@ -237,6 +274,9 @@ public class PlayViewController extends AView implements Observer, Initializable
         if (saveDestination != null){
 
             try (ObjectOutputStream saveStream = new ObjectOutputStream(new FileOutputStream(saveDestination))) {
+
+                saveStream.writeObject(viewModel.getMaze().length);
+                saveStream.writeObject(viewModel.getMaze()[0].length);
 
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 MyCompressorOutputStream compressorOutputStream = new MyCompressorOutputStream(byteArrayOutputStream);
@@ -262,10 +302,13 @@ public class PlayViewController extends AView implements Observer, Initializable
             try (ObjectInputStream loadStream = new ObjectInputStream(new FileInputStream(loadDestination))) {
 
 
+                int rowNumber = (int)loadStream.readObject();
+                int colNumber = (int)loadStream.readObject();
+
                 //Reading maze information from saved file
                 byte[] compressedMaze = (byte[]) loadStream.readObject(); //read generated maze (compressed with MyCompressor) from server
                 InputStream inputStream = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                byte[] decompressedMaze = new byte[viewModel.getMaze().length * viewModel.getMaze()[0].length + 50 /* assuming max maze size 1000x1000 */]; //allocating byte[] for the decompressed maze -
+                byte[] decompressedMaze = new byte[rowNumber * colNumber + 50 /* assuming max maze size 1000x1000 */]; //allocating byte[] for the decompressed maze -
                 inputStream.read(decompressedMaze); //Fill decompressedMaze with bytes
 
 

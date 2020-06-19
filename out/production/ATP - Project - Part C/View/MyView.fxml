@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane id="mainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/View/Covid19Style.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenuController">
@@ -46,9 +47,12 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="chooseCharacterButton" mnemonicParsing="false" onAction="#goToChooseView" text="Choose character" />
+            <Button fx:id="chooseCharacterButton" mnemonicParsing="false" onAction="#goToChooseView" text="Choose character">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="muteButton" mnemonicParsing="false" text="Mute" />
+            <ImageView fx:id="sound" fitHeight="70.0" fitWidth="80.0" onMouseClicked="#setSound" pickOnBounds="true" preserveRatio="true" />
          </children>
          <opaqueInsets>
             <Insets />
