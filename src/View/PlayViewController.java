@@ -11,9 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -38,6 +36,11 @@ public class PlayViewController extends AView implements Observer, Initializable
     private Image pathImage;
     private Image goalImage;
     private Image solutionPathImage;
+
+    private double oldX;
+    private double oldY;
+    private double mazeDisplayCellWidth;
+    private double mazeDisplayCellHeight;
 
     @FXML
     private TextField textField_rowNumber;
@@ -136,6 +139,9 @@ public class PlayViewController extends AView implements Observer, Initializable
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid parameter");
                 alert.setContentText("Wrong parameter received! Please enter an integer value between 2 and 100");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("Covid19Style.css").toExternalForm());
+                dialogPane.getStyleClass().add("Alert");
                 alert.showAndWait();
             }
             else if (arg instanceof String && arg.equals("movedCharacter")){
@@ -144,46 +150,48 @@ public class PlayViewController extends AView implements Observer, Initializable
             else if (arg instanceof String && arg.equals("goalReached")){
 
                 displayMaze();
-
-                if(mediaPlayer_Dead == null){
-                    Media musicFile = new Media(getClass().getResource("/Mp3/HeartBeatDying.mp3").toString());
-                    mediaPlayer_Dead = new MediaPlayer(musicFile);
-                }
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Congratulations");
-                alert.setHeaderText("You Win!");
-                alert.setContentText(
-                        "You have managed to infect the whole body!\n" +
-                                "You have managed to prove yourself as a severe, highly infective and extremely lethal virus. This unsuspecting human had no chance against you.\n" +
-                                "But there are still other humans to eradicate. Now set a bigger maze and keep practicing.");
-
-                alert.setOnCloseRequest(e ->{
-                    mediaPlayer_Dead.stop();
-                    if(isScaryMusicPlaying)
-                        mediaPlayer_Scary.play();
-                });
-
-                alert.setOnShowing(e ->{
-                    mediaPlayer_Scary.stop();
-                    mediaPlayer_Dead.play();
-                    mediaPlayer_Dead.setVolume(0.07);
-
-                    mediaPlayer_Dead.setOnEndOfMedia(() -> {
-                        if(isScaryMusicPlaying)
-                            mediaPlayer_Scary.play();
-                    });
-
-                });
-
-                DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("Covid19Style.css").toExternalForm());
-                dialogPane.getStyleClass().add("winAlert");
-                alert.showAndWait();
-
+                handelInvalidParametersAlert();
             }
         }
         //disable All buttons
+    }
+
+    private void handelInvalidParametersAlert(){
+        if(mediaPlayer_Dead == null){
+            Media musicFile = new Media(getClass().getResource("/Mp3/HeartBeatDying.mp3").toString());
+            mediaPlayer_Dead = new MediaPlayer(musicFile);
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Congratulations");
+        alert.setHeaderText("You Win!");
+        alert.setContentText(
+                "You have managed to infect the whole body!\n" +
+                        "You have managed to prove yourself as a severe, highly infective and extremely lethal virus. This unsuspecting human had no chance against you.\n" +
+                        "But there are still other humans to eradicate. Now set a bigger maze and keep practicing.");
+
+        alert.setOnCloseRequest(e ->{
+            mediaPlayer_Dead.stop();
+            if(isScaryMusicPlaying)
+                mediaPlayer_Scary.play();
+        });
+
+        alert.setOnShowing(e ->{
+            mediaPlayer_Scary.stop();
+            mediaPlayer_Dead.play();
+            mediaPlayer_Dead.setVolume(0.1);
+
+            mediaPlayer_Dead.setOnEndOfMedia(() -> {
+                if(isScaryMusicPlaying)
+                    mediaPlayer_Scary.play();
+            });
+
+        });
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("Covid19Style.css").toExternalForm());
+        dialogPane.getStyleClass().add("winAlert");
+        alert.showAndWait();
     }
 
     public void displayMaze(){
@@ -226,6 +234,12 @@ public class PlayViewController extends AView implements Observer, Initializable
 
         viewModel.generateMaze(textField_rowNumber.getText(), textField_columnNumber.getText());
 
+        mazeDisplayCellWidth = mazePane.getWidth() / viewModel.getMaze()[0].length;
+        mazeDisplayCellHeight = mazePane.getHeight() / viewModel.getMaze().length;
+
+        oldX = viewModel.getCharacterColumn() * mazeDisplayCellWidth;
+        oldY = viewModel.getCharacterRow() * mazeDisplayCellHeight;
+
     }
 
     public void showSolution(){
@@ -252,11 +266,6 @@ public class PlayViewController extends AView implements Observer, Initializable
 
     public void mouseClicked(MouseEvent mouseEvent) {
         mazeDisplayControl.requestFocus();
-    }
-
-    public void dragMouse(MouseDragEvent mouseDragEvent) {
-        //mouseClicked(mouseDragEvent);
-        //System.out.println(mouseDragEvent.getEventType());
     }
 
     public void KeyPressed(KeyEvent keyEvent){
@@ -319,6 +328,96 @@ public class PlayViewController extends AView implements Observer, Initializable
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * drag mouse fuction makes it possible to move the character by dragging the mouse of the display.
+     * It converts the relative position of the mouse to an appropriate key code and calls move character function.
+     * @param mouseEvent - the event that drags the character
+     */
+    public void dragMouse(MouseEvent mouseEvent) {
+
+        if(viewModel.getMaze() != null){
+
+            double quarterCellHeight = mazeDisplayCellHeight /4;
+            double quarterCellWidth = mazeDisplayCellWidth/4;
+            boolean hasMoved = false;
+
+
+            if(mouseEvent.getY() >= oldY + quarterCellHeight  && mouseEvent.getY() < oldY+ 3*quarterCellHeight && mouseEvent.getX() > oldX + mazeDisplayCellWidth + quarterCellWidth && mouseEvent.getX() < oldX + mazeDisplayCellWidth*2 - quarterCellWidth){
+                oldX += mazeDisplayCellWidth;
+                hasMoved = viewModel.moveCharacter(KeyCode.RIGHT);
+                if(!hasMoved){
+                    oldX -= mazeDisplayCellWidth;
+                }
+            }
+            else if(mouseEvent.getY() >= oldY + quarterCellHeight  && mouseEvent.getY() < oldY+ 3*quarterCellHeight && mouseEvent.getX() >= oldX - mazeDisplayCellWidth + quarterCellWidth && mouseEvent.getX() < oldX - quarterCellWidth){
+                oldX -= mazeDisplayCellWidth;
+                hasMoved = viewModel.moveCharacter(KeyCode.LEFT);
+                if(!hasMoved){
+                    oldX += mazeDisplayCellWidth;
+                }
+            }
+
+            else if(mouseEvent.getX() >= oldX + quarterCellWidth && mouseEvent.getX() <oldX+ 3*quarterCellWidth && mouseEvent.getY() > oldY + mazeDisplayCellHeight + quarterCellHeight && mouseEvent.getY() < oldY + mazeDisplayCellHeight *2 - quarterCellHeight){
+                oldY += mazeDisplayCellHeight;
+                hasMoved = viewModel.moveCharacter(KeyCode.DOWN);
+                if(!hasMoved){
+                    oldY -= mazeDisplayCellHeight;
+                }
+            }
+
+            else if(mouseEvent.getX() >= oldX + quarterCellWidth && mouseEvent.getX() <oldX+3*quarterCellWidth && mouseEvent.getY() > oldY - mazeDisplayCellHeight + quarterCellHeight && mouseEvent.getY() < oldY - quarterCellHeight){
+                oldY -= mazeDisplayCellHeight;
+                hasMoved = viewModel.moveCharacter(KeyCode.UP);
+                if(!hasMoved){
+                    oldY += mazeDisplayCellHeight;
+                }
+            }
+            //UP LEFT
+            else if(mouseEvent.getY() > oldY - 3*quarterCellHeight && mouseEvent.getY() < oldY -quarterCellHeight && mouseEvent.getX() >= oldX - 3*quarterCellWidth && mouseEvent.getX() < oldX - quarterCellWidth){
+                oldX -= mazeDisplayCellWidth;
+                oldY -= mazeDisplayCellHeight;
+                hasMoved = viewModel.moveCharacter(KeyCode.NUMPAD7);
+                if(!hasMoved){
+                    oldX += mazeDisplayCellWidth;
+                    oldY += mazeDisplayCellHeight;
+                }
+            }
+            //UP RIGHT
+            else if(mouseEvent.getY() > oldY - 3*quarterCellHeight && mouseEvent.getY() < oldY -quarterCellHeight  && mouseEvent.getX() > oldX + mazeDisplayCellWidth + quarterCellWidth && mouseEvent.getX() < oldX + mazeDisplayCellWidth*2 - quarterCellWidth){
+                oldX += mazeDisplayCellWidth;
+                oldY -= mazeDisplayCellHeight;
+                hasMoved = viewModel.moveCharacter(KeyCode.NUMPAD9);
+                if(!hasMoved){
+                    oldX -= mazeDisplayCellWidth;
+                    oldY += mazeDisplayCellHeight;
+                }
+            }
+            //DOWN RIGHT
+            else if(mouseEvent.getY() > oldY + mazeDisplayCellHeight + quarterCellHeight && mouseEvent.getY() < oldY + mazeDisplayCellHeight *2 - quarterCellHeight && mouseEvent.getX() > oldX + mazeDisplayCellWidth + quarterCellWidth && mouseEvent.getX() < oldX + mazeDisplayCellWidth*2 - quarterCellWidth){
+                oldX += mazeDisplayCellWidth;
+                oldY += mazeDisplayCellHeight;
+                hasMoved = viewModel.moveCharacter(KeyCode.NUMPAD3);
+                if(!hasMoved){
+                    oldX -= mazeDisplayCellWidth;
+                    oldY -= mazeDisplayCellHeight;
+                }
+            }
+            //DOWN LEFT
+            else if(mouseEvent.getY() > oldY + mazeDisplayCellHeight + quarterCellHeight && mouseEvent.getY() < oldY + mazeDisplayCellHeight *2 - quarterCellHeight && mouseEvent.getX() >= oldX - mazeDisplayCellWidth + quarterCellWidth && mouseEvent.getX() < oldX - quarterCellWidth){
+                oldX -= mazeDisplayCellWidth;
+                oldY += mazeDisplayCellHeight;
+                hasMoved = viewModel.moveCharacter(KeyCode.NUMPAD1);
+                if(!hasMoved){
+                    oldX += mazeDisplayCellWidth;
+                    oldY -= mazeDisplayCellHeight;
+                }
+            }
+
+        }
+
+
     }
 
 }

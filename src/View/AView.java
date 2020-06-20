@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
@@ -28,20 +29,20 @@ public abstract class AView implements IView {
     private AboutController aboutController;
 
     protected static MyViewModel viewModel;
-    protected static Stage pirmaryStage;
+    protected static Stage primaryStage;
 
     protected static ImageView characterImageHolder = new ImageView();;
 
-    public static Stage getPirmaryStage() {
-        return pirmaryStage;
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     protected static MediaPlayer mediaPlayer_Dead;
     protected static MediaPlayer mediaPlayer_Scary;
     protected static boolean isScaryMusicPlaying;
 
-    public static void setPirmaryStage(Stage pirmaryStage) {
-        AView.pirmaryStage = pirmaryStage;
+    public static void setPrimaryStage(Stage primaryStage) {
+        AView.primaryStage = primaryStage;
     }
 
     @FXML
@@ -60,8 +61,8 @@ public abstract class AView implements IView {
     @FXML
     protected void callUponExit(Event actionEvent){
         //close primary stage
-        pirmaryStage.fireEvent(
-                new WindowEvent(pirmaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)
+        primaryStage.fireEvent(
+                new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)
         );
     }
 
@@ -69,7 +70,7 @@ public abstract class AView implements IView {
     protected void goToAbout(ActionEvent actionEvent){
         try {
 
-            Scene lastScene = pirmaryStage.getScene();
+            Scene lastScene = primaryStage.getScene();
 
             if(aboutScene == null){
 
@@ -81,8 +82,8 @@ public abstract class AView implements IView {
 
             aboutController.setLastScene(lastScene);
 
-            pirmaryStage.setScene(aboutScene);
-            pirmaryStage.show();
+            primaryStage.setScene(aboutScene);
+            primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,7 +92,7 @@ public abstract class AView implements IView {
     protected void goToInstructions(ActionEvent actionEvent){
         try {
 
-            Scene lastScene = pirmaryStage.getScene();
+            Scene lastScene = primaryStage.getScene();
 
             if(instructionsScene == null){
 
@@ -103,8 +104,8 @@ public abstract class AView implements IView {
 
             instructionsController.setLastScene(lastScene);
 
-            pirmaryStage.setScene(instructionsScene);
-            pirmaryStage.show();
+            primaryStage.setScene(instructionsScene);
+            primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,14 +126,15 @@ public abstract class AView implements IView {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String message = "Number of threads is: ";
-        message += properties.getProperty("threadsNum") + "\n";
-        message += "The searching algorithm is: ";
-        message += properties.getProperty("searchAlgorithm") + "\n";
-        message += "The generating method is: ";
-        message += properties.getProperty("generateMazeAlgorithm") + "\n";
+        String message = "Number of threads is: " + properties.getProperty("threadsNum") + "\n" +"The searching algorithm is: " +
+                properties.getProperty("searchAlgorithm") + "\n" +  "The generating method is: "
+                + properties.getProperty("generateMazeAlgorithm") + "\n";
 
         alert.setContentText(message);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("Covid19Style.css").toExternalForm());
+        dialogPane.getStyleClass().add("Alert");
 
         alert.showAndWait();
     }

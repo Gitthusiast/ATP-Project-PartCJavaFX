@@ -11,8 +11,45 @@ Indian Red #D3686A
     -fx-background-color: radial-gradient(radius 20px, hotpink, lightpink);
 }
 
-#winAlert{
-    -fx-background-color: radial-gradient(radius 25px, darkred, black);
+.Alert{
+    -fx-background-color: black;
+}
+
+.Alert .label{
+    -fx-text-fill: white;
+}
+.Alert .header-panel{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+.Alert .button{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box, #93090A, 30.0, 0.0, 0.0, 0.0);
+}
+
+.winAlert{
+    -fx-background-image: url("/resources/Images/heart2.jpg");
+}
+.winAlert .label{
+    -fx-font-size: 150%;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.winAlert > .header-panel{
+    -fx-background-color: black;
+}
+
+.winAlert .header-panel .label{
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.winAlert .button{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box, green, 30.0, 0.0, 0.0, 0.0);
 }
 
 #mainMenu{

@@ -48,7 +48,7 @@ public interface IModel {
      * Move the character according to MovementCode input.
      * @param step enum from the View Model.
      */
-    public void moveCharacter(MovementCode step);
+    public boolean moveCharacter(MovementCode step);
 
 
     /**

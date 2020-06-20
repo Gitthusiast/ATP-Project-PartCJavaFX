@@ -106,9 +106,9 @@ public class MazeDisplayControl extends Canvas {
         graphicsContext.fillRect(characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);*/
         graphicsContext.drawImage(characterImage, characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);
 
-
-
     }
+
+    
 
     public boolean isShowSolution() {
         return showSolution;
