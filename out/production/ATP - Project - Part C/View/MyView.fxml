@@ -34,23 +34,20 @@
       </VBox>
    </top>
    <center>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="83.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="83.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="playButton" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToPlayView" text="Play" />
-            <Button fx:id="instructionsButton" minHeight="30.0" minWidth="100.0" mnemonicParsing="false" onAction="#goToInstructions" text="Instructions" />
+            <Button fx:id="playButton" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goToPlayView" pickOnBounds="false" text="Play" />
+            <Button fx:id="instructionsButton" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goToInstructions" pickOnBounds="false" text="Instructions" />
+            <Button fx:id="chooseCharacterButton" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goToChooseView" pickOnBounds="false" text="Choose character" />
          </children>
          <padding>
-            <Insets left="5.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
    </center>
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="chooseCharacterButton" mnemonicParsing="false" onAction="#goToChooseView" text="Choose character">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Button>
             <Region HBox.hgrow="ALWAYS" />
             <ImageView fx:id="sound" fitHeight="70.0" fitWidth="80.0" onMouseClicked="#setSound" pickOnBounds="true" preserveRatio="true" />
          </children>

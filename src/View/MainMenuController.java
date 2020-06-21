@@ -56,6 +56,9 @@ public class MainMenuController extends AView implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        //set initial avatar image
+        AView.characterImageHolder.setImage(new Image("Images/CovidAvatars/classicCovid.png"));
     }
 
     @FXML

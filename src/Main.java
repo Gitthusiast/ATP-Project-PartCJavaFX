@@ -1,6 +1,5 @@
 import Model.MyModel;
 import View.AView;
-import View.MainMenuController;
 import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
@@ -30,7 +28,7 @@ public class Main extends Application {
         Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
         //--------------
         AView.setViewModel(viewModel);
-        AView.setPirmaryStage(primaryStage);
+        AView.setPrimaryStage(primaryStage);
         //--------------
         primaryStage.setTitle("Covid19 End Game");
         primaryStage.setScene(new Scene(root, 800, 700));

@@ -37,8 +37,6 @@ public class chooseCharacterController extends AView implements Initializable {
 
         images = new ArrayList<>();
 
-        //images.add(new Image(new FileInputStream("//blueCovid.jpg")));
-        //images.add(new Image("blueCovid.jpg"));
         images.add(new Image("Images/CovidAvatars/blueCovid.png"));
         images.add(new Image("Images/CovidAvatars/classicCovid.png"));
         images.add(new Image("Images/CovidAvatars/complexVirus.png"));
@@ -47,20 +45,13 @@ public class chooseCharacterController extends AView implements Initializable {
         images.add(new Image("Images/CovidAvatars/simpleVirus.png"));
         images.add(new Image("Images/CovidAvatars/tealVirus.png"));
         images.add(new Image("Images/CovidAvatars/zikahVirus.png"));
-        /*images.add(new Image("/resources/Images/classicCovid.jpg"));
-        images.add(new Image("/resources/Images/complexCovid.jpg"));
-        images.add(new Image("/resources/Images/Influenza_Virus.jpg"));
-        images.add(new Image("/resources/Images/purpleGang.jpg"));
-        images.add(new Image("/resources/Images/simpleVirus.jpg"));
-        images.add(new Image("/resources/Images/tealVirus.jpg"));
-        images.add(new Image("/resources/Images/zikahVirus.jpg"));*/
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         AView.characterImageHolder.imageProperty().bind(chosenImageView.imageProperty());
-        chosenImage = images.get(0);
+        chosenImage = images.get(1);
         chosenImageView.setImage(chosenImage);
     }
 

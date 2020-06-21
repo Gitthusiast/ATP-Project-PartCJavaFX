@@ -22,6 +22,7 @@ public class MazeDisplayControl extends Canvas {
     private Image characterImage;
     private Image goalImage;
     private Image solutionPathImage;
+    private Image backgroundImage;
 
     private Color backgroundWallColor;
     private Color backgroundPathColor;
@@ -62,6 +63,8 @@ public class MazeDisplayControl extends Canvas {
 
     public void setBackgroundPathColor(Color backgroundPathColor) { this.backgroundPathColor = backgroundPathColor; }
 
+    public void setBackgroundImage(Image backgroundImage) { this.backgroundImage = backgroundImage; }
+
     public void drawMaze(){
 
         double canvasWidth = this.getWidth();
@@ -72,6 +75,8 @@ public class MazeDisplayControl extends Canvas {
 
         GraphicsContext graphicsContext = getGraphicsContext2D(); //get the relevant graphic context so that we can draw on owr canvas
         graphicsContext.clearRect(0,0, getWidth(), getHeight());
+
+        graphicsContext.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
 
         for(int i=0; i<rowNum; i++){
             for(int j=0; j<colNum; j++){
@@ -99,7 +104,7 @@ public class MazeDisplayControl extends Canvas {
         }
 
         graphicsContext.drawImage(goalImage, goalPosition[1] * cellWidth, goalPosition[0] * cellHeight, cellWidth, cellHeight);
-        
+
         graphicsContext.drawImage(characterImage, characterPosition[1] * cellWidth, characterPosition[0] * cellHeight, cellWidth, cellHeight);
 
 

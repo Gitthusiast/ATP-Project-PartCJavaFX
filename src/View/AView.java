@@ -28,20 +28,20 @@ public abstract class AView implements IView {
     private AboutController aboutController;
 
     protected static MyViewModel viewModel;
-    protected static Stage pirmaryStage;
+    protected static Stage primaryStage;
 
     protected static ImageView characterImageHolder = new ImageView();;
 
-    public static Stage getPirmaryStage() {
-        return pirmaryStage;
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     protected static MediaPlayer mediaPlayer_Dead;
     protected static MediaPlayer mediaPlayer_Scary;
     protected static boolean isScaryMusicPlaying;
 
-    public static void setPirmaryStage(Stage pirmaryStage) {
-        AView.pirmaryStage = pirmaryStage;
+    public static void setPrimaryStage(Stage primaryStage) {
+        AView.primaryStage = primaryStage;
     }
 
     @FXML
@@ -60,8 +60,8 @@ public abstract class AView implements IView {
     @FXML
     protected void callUponExit(Event actionEvent){
         //close primary stage
-        pirmaryStage.fireEvent(
-                new WindowEvent(pirmaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)
+        primaryStage.fireEvent(
+                new WindowEvent(primaryStage, WindowEvent.WINDOW_CLOSE_REQUEST)
         );
     }
 
@@ -69,7 +69,7 @@ public abstract class AView implements IView {
     protected void goToAbout(ActionEvent actionEvent){
         try {
 
-            Scene lastScene = pirmaryStage.getScene();
+            Scene lastScene = primaryStage.getScene();
 
             if(aboutScene == null){
 
@@ -81,8 +81,8 @@ public abstract class AView implements IView {
 
             aboutController.setLastScene(lastScene);
 
-            pirmaryStage.setScene(aboutScene);
-            pirmaryStage.show();
+            primaryStage.setScene(aboutScene);
+            primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,7 +91,7 @@ public abstract class AView implements IView {
     protected void goToInstructions(ActionEvent actionEvent){
         try {
 
-            Scene lastScene = pirmaryStage.getScene();
+            Scene lastScene = primaryStage.getScene();
 
             if(instructionsScene == null){
 
@@ -103,8 +103,8 @@ public abstract class AView implements IView {
 
             instructionsController.setLastScene(lastScene);
 
-            pirmaryStage.setScene(instructionsScene);
-            pirmaryStage.show();
+            primaryStage.setScene(instructionsScene);
+            primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

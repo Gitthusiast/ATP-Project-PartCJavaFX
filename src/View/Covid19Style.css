@@ -31,6 +31,21 @@ Indian Red #D3686A
     -fx-background-size: stretch;
 }
 
+#aboutMenu .label{
+
+    -fx-font-size: 150%;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+#chooseMenu{
+
+    -fx-background-image: url("/resources/Images/redBackground2.jfif");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-background-size: stretch;
+}
+
 #instructionsMenu{
 
     -fx-background-image: url("/resources/Images/covidInstructions.jpeg");
@@ -55,10 +70,97 @@ Indian Red #D3686A
     -fx-background-size: stretch;
 }
 
-#chooseMenu{
+#playMenu .label{
 
-    -fx-background-image: url("/resources/Images/redBackground2.jfif");
-    -fx-background-repeat: stretch;
-    -fx-background-position: center center;
-    -fx-background-size: stretch;
+    -fx-font-size: 130%;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#playMenu .menu-bar .label{
+
+    -fx-font-size: 100%;
+    -fx-font-weight: normal;
+    -fx-text-fill: black;
+}
+
+.button{
+    
+    -fx-font-weight: bold;
+    -fx-font-size: 130%;
+    -fx-text-fill: #520201;
+    
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, #D3686A 40%, #BA0B0D, #93090A);
+    -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
+}
+
+.button:hover{
+    -fx-text-fill: #DE9291;
+}
+
+.menu-bar{
+
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(to bottom, #520201, black);
+    -fx-border-radius: 80%;
+    -fx-border-width: 200%;
+
+
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, #D3686A 40%, #BA0B0D, #93090A);
+    -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
+}
+
+.menu-item{
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, #D3686A 40%, #BA0B0D, #93090A);
+    -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
+}
+
+
+.menu-bar .label{
+
+    -fx-font-weight: bold;
+    -fx-font-size: 130%;
+    -fx-text-fill: #520201;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:showing{
+    -fx-background-color: transparent;
+}
+
+.menu-bar .label:hover,
+.menu-item .label:hover{
+
+    -fx-text-fill: #DE9291;
+}
+
+
+#instructionsMenu .button{
+
+    -fx-font-weight: bold;
+    -fx-font-size: 130%;
+    -fx-text-fill: midnightblue;
+
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, lightskyblue 40%, royalblue, darkblue);
+    -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
+}
+
+#instructionsMenu .button:hover{
+
+    -fx-text-fill: steelblue;
+}
+
+#aboutMenu .button{
+
+    -fx-font-weight: bold;
+    -fx-font-size: 130%;
+    -fx-text-fill: darkolivegreen;
+
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, antiquewhite 40%, seagreen, palegreen);
+    -fx-effect: dropshadow(gaussian, darkseagreen, 30.0, 0.5, 0.0, 0.0);
+}
+
+#aboutMenu .button:hover{
+
+    -fx-text-fill: darkseagreen;
 }

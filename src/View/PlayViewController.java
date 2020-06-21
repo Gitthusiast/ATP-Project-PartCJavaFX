@@ -3,7 +3,10 @@ package View;
 import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,6 +41,7 @@ public class PlayViewController extends AView implements Observer, Initializable
     private Image pathImage;
     private Image goalImage;
     private Image solutionPathImage;
+    private Image backgroundImage;
 
     @FXML
     private TextField textField_rowNumber;
@@ -84,19 +88,27 @@ public class PlayViewController extends AView implements Observer, Initializable
         pathImage = new Image("Images/bloodCells2.jpeg");
         goalImage = new Image("Images/lungs.png");
         solutionPathImage = new Image("Images/solution.png");
+        backgroundImage = new Image("/resources/Images/bloodCells2.jpeg");
 
         mazeDisplayControl.setWallImage(wallImage);
-        mazeDisplayControl.setPathImage(pathImage);
+        mazeDisplayControl.setPathImage(null);
         mazeDisplayControl.setGoalImage(goalImage);
         mazeDisplayControl.setSolutionPathImage(solutionPathImage);
+        mazeDisplayControl.setBackgroundImage(backgroundImage);
 
-        mazeDisplayControl.setBackgroundPathColor(Color.web("#DE9291"));
-        mazeDisplayControl.setBackgroundWallColor(Color.web("#DE9291"));
+        mazeDisplayControl.setBackgroundPathColor(Color.web("#DE929100"));
+        mazeDisplayControl.setBackgroundWallColor(Color.web("#DE929100"));
 
         mazeDisplayControl.widthProperty().bind(mazePane.widthProperty());
         mazeDisplayControl.heightProperty().bind(mazePane.heightProperty());
+
     }
 
+
+    private void setZoomScaling(){
+
+
+    }
 
 
     public void setMainMenuScene(Scene mainMenuScene) { this.mainMenuScene = mainMenuScene; }
