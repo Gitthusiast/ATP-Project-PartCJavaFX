@@ -200,7 +200,8 @@ public class MyModel extends Observable implements IModel{
      * @param step movement direction
      */
     @Override
-    public void moveCharacter(MovementCode step) {
+    public boolean moveCharacter(MovementCode step) {
+        boolean hasMoved = true;
 
         if(maze != null){
             int[][] aMaze = maze.getMaze();
@@ -212,6 +213,7 @@ public class MyModel extends Observable implements IModel{
                     characterRow --;
                     if(characterRow <= -1 || aMaze[characterRow][characterColumn] == 1){
                         characterRow++; //we don't want to allow illegal moves
+                        hasMoved = false;
                     }
                     break;
                 case RIGHT: //RIGHT
@@ -219,6 +221,7 @@ public class MyModel extends Observable implements IModel{
                     characterColumn++;
                     if(characterColumn >= maze.getColumnNumber() || aMaze[characterRow][characterColumn] == 1){
                         characterColumn--;
+                        hasMoved = false;
                     }
                     break;
                 case DOWN: //DOWN
@@ -226,6 +229,7 @@ public class MyModel extends Observable implements IModel{
                     characterRow++;
                     if(characterRow >= maze.getRowNumber() || aMaze[characterRow][characterColumn] == 1){
                         characterRow--;
+                        hasMoved = false;
                     }
                     break;
                 case LEFT: //LEFT
@@ -233,6 +237,7 @@ public class MyModel extends Observable implements IModel{
                     characterColumn--;
                     if(characterColumn <= -1 || aMaze[characterRow][characterColumn] == 1){
                         characterColumn++;
+                        hasMoved = false;
                     }
                     break;
                 case TOP_LEFT: //UP LEFT
@@ -243,6 +248,7 @@ public class MyModel extends Observable implements IModel{
 
                         characterColumn++;
                         characterRow++;
+                        hasMoved = false;
                     }
                     break;
                 case TOP_RIGHT: //UP RIGHT
@@ -253,6 +259,7 @@ public class MyModel extends Observable implements IModel{
 
                         characterRow++;
                         characterColumn--;
+                        hasMoved = false;
                     }
                     break;
                 case BOTTOM_RIGHT: //DOWN RIGHT
@@ -263,6 +270,7 @@ public class MyModel extends Observable implements IModel{
 
                         characterColumn--;
                         characterRow--;
+                        hasMoved = false;
                     }
                     break;
                 case BOTTOM_LEFT: //DOWN LEFT
@@ -273,6 +281,7 @@ public class MyModel extends Observable implements IModel{
 
                         characterRow--;
                         characterColumn++;
+                        hasMoved = false;
                     }
                     break;
                 default:
@@ -282,7 +291,7 @@ public class MyModel extends Observable implements IModel{
             setChanged();
             notifyObservers("movedCharacter");
         }
-
+        return hasMoved;
     }
 
     /**

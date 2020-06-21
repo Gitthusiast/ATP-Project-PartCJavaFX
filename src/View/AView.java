@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
@@ -125,14 +126,15 @@ public abstract class AView implements IView {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String message = "Number of threads is: ";
-        message += properties.getProperty("threadsNum") + "\n";
-        message += "The searching algorithm is: ";
-        message += properties.getProperty("searchAlgorithm") + "\n";
-        message += "The generating method is: ";
-        message += properties.getProperty("generateMazeAlgorithm") + "\n";
+        String message = "Number of threads is: " + properties.getProperty("threadsNum") + "\n" +"The searching algorithm is: " +
+                properties.getProperty("searchAlgorithm") + "\n" +  "The generating method is: "
+                + properties.getProperty("generateMazeAlgorithm") + "\n";
 
         alert.setContentText(message);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("Covid19Style.css").toExternalForm());
+        dialogPane.getStyleClass().add("Alert");
 
         alert.showAndWait();
     }

@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -47,7 +48,7 @@ public class MainMenuController extends AView implements Initializable {
             Media musicFile =  new Media(getClass().getResource("/Mp3/HeartBeatScary.mp3").toString());
             mediaPlayer_Scary = new MediaPlayer(musicFile);
         }
-        mediaPlayer_Scary.setVolume(0.1);
+        mediaPlayer_Scary.setVolume(0.2);
         mediaPlayer_Scary.setAutoPlay(true);
         isScaryMusicPlaying = true;
         mediaPlayer_Scary.setOnEndOfMedia(() -> mediaPlayer_Scary.seek(Duration.ZERO));
@@ -127,8 +128,6 @@ public class MainMenuController extends AView implements Initializable {
 
             }
 
-
-
             chooseCharacterController.setMainMenuScene(mainMenuScene);
 
             stage.setScene(chooseCharacterScene);
@@ -161,5 +160,4 @@ public class MainMenuController extends AView implements Initializable {
             }
         }
     }
-
 }

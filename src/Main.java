@@ -7,9 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -44,6 +42,9 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent event) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you done infecting the world?", Yes, No);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("View/Covid19Style.css").toExternalForm());
+                dialogPane.getStyleClass().add("Alert");
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.orElse(No) == Yes){
                     try {

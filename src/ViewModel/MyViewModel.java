@@ -167,7 +167,7 @@ public class MyViewModel extends Observable implements Observer {
         return movementCode;
     }
 
-    public void moveCharacter(KeyCode movement){ model.moveCharacter(convertKeyCode(movement));}
+    public boolean moveCharacter(KeyCode movement){ return model.moveCharacter(convertKeyCode(movement));}
 
     public int getCharacterRow(){ return characterRow; }
     public int getCharacterColumn(){ return characterColumn; }
