@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -62,7 +61,7 @@ public class PlayViewController extends AView implements Observer, Initializable
     @FXML
     private Label label_currentPosition;
     @FXML
-    private Pane mazePane;
+    private ZoomableScrollPane mazeScrollPane;
 
     public PlayViewController() {
 
@@ -104,13 +103,16 @@ public class PlayViewController extends AView implements Observer, Initializable
         mazeDisplayControl.setBackgroundPathColor(Color.web("#DE929100"));
         mazeDisplayControl.setBackgroundWallColor(Color.web("#DE929100"));
 
-        mazeDisplayControl.widthProperty().bind(mazePane.widthProperty());
-        mazeDisplayControl.heightProperty().bind(mazePane.heightProperty());
+        mazeScrollPane.initPane(mazeDisplayControl);
+
+        mazeDisplayControl.widthProperty().bind(mazeScrollPane.widthProperty());
+        mazeDisplayControl.heightProperty().bind(mazeScrollPane.heightProperty());
 
     }
 
 
     private void setZoomScaling(){
+
 
 
     }
@@ -139,6 +141,7 @@ public class PlayViewController extends AView implements Observer, Initializable
 
                 displayMaze();
 
+                mazeScrollPane.setVisible(true);
                 generateMazeButton.setDisable(false);
                 showSolutionButton.setDisable(false);
                 saveMenuOption.setDisable(false);

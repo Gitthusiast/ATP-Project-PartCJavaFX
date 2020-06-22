@@ -2,6 +2,7 @@
 
 <?import View.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -26,30 +27,34 @@
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#goToInstructions" text="Instructions" />
-                     </items></Menu>
+                     </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="About">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#goToAbout" text="More about us" />
-                     </items></Menu>
+                     </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Exit">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#callUponExit" text="Exit Game" />
-                     </items></Menu>
+                     </items>
+                </Menu>
               </menus>
             </MenuBar>
             <HBox alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" text="Welcome to our rigorous virus training program!&#10;You are going to enter a maze simulating the human blood vessels.&#10;Your goal is to find the entrance to the lungs in the least amount of time and the least amount of steps.&#10;Before we start, please choose the size of the maze in integer values between 2 and 100." textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                  <Label id="playMenuLabel" alignment="CENTER" text="Welcome to our rigorous virus training program!&#10;You are going to enter a maze simulating the human blood vessels.&#10;Your goal is to find the entrance to the lungs in the least amount of time and the least amount of steps.&#10;Before we start, please choose the size of the maze in integer values between 2 and 100." textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin></Label>
+                     </HBox.margin>
+                  </Label>
                </children>
             </HBox>
             <HBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label fx:id="label_rowNumber" text="Number of rows:" />
+                  <Label id="playMenuLabel" fx:id="label_rowNumber" text="Number of rows:" />
                   <TextField fx:id="textField_rowNumber" promptText="please enter a number" />
-                  <Label fx:id="label_columnNumber" text="Number of columns:" />
+                  <Label id="playMenuLabel" fx:id="label_columnNumber" text="Number of columns:" />
                   <TextField fx:id="textField_columnNumber" promptText="please enter a number" />
                </children>
                <opaqueInsets>
@@ -57,7 +62,8 @@
                </opaqueInsets>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding></HBox>
+               </padding>
+            </HBox>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
                   <Button fx:id="generateMazeButton" alignment="CENTER" contentDisplay="CENTER" minWidth="180.0" mnemonicParsing="false" onAction="#generateMaze" pickOnBounds="false" text="Generate Maze" />
@@ -81,7 +87,7 @@
    <bottom>
       <HBox spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="label_currentPosition" text="Position: (0,0)" />
+            <Label id="playMenuLabel" fx:id="label_currentPosition" text="Position: (0,0)" />
             <Pane HBox.hgrow="ALWAYS" />
          </children>
          <padding>
@@ -90,8 +96,17 @@
       </HBox>
    </bottom>
    <center>
-       <Pane fx:id="mazePane" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-           <MazeDisplayControl fx:id="mazeDisplayControl" height="200.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" onMouseDragged="#dragMouse" width="450.0" />
-       </Pane>
+      <ZoomableScrollPane fx:id="mazeScrollPane" visible="false" BorderPane.alignment="CENTER">
+         <content>
+            <Group>
+               <children>
+                    <MazeDisplayControl fx:id="mazeDisplayControl" height="200.0" nodeOrientation="INHERIT" onMouseClicked="#mouseClicked" onMouseDragged="#dragMouse" width="450.0" />
+               </children>
+            </Group>
+         </content>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </ZoomableScrollPane>
    </center>
 </BorderPane>
