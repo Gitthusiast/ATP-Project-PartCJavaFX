@@ -20,7 +20,7 @@ import java.io.*;
 import java.util.Properties;
 
 
-public abstract class AView implements IView {
+public abstract class AView {
 
     private Scene instructionsScene;
     private Scene aboutScene;

@@ -23,13 +23,13 @@ public class Main extends Application {
         model.addObserver(viewModel);
         //--------------
         FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("View/MyView.fxml").openStream());
+        Parent root = fxmlLoader.load(getClass().getResource("View/MainMenuView.fxml").openStream());
         //--------------
         AView.setViewModel(viewModel);
         AView.setPrimaryStage(primaryStage);
         //--------------
         primaryStage.setTitle("Covid19 End Game");
-        primaryStage.setScene(new Scene(root, 800, 700));
+        primaryStage.setScene(new Scene(root, 1248, 769));
         //--------------
         SetStageCloseEvent(primaryStage, model);
         primaryStage.show();

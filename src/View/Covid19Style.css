@@ -98,15 +98,14 @@ Indian Red #D3686A
 .menu-item{
 
     -fx-border-style: solid;
-    -fx-border-color: linear-gradient(to bottom, #520201, black);
-    /*-fx-border-radius: 100%;*/
-    /*-fx-border-width: 300%;*/
-    /*-fx-border-insets: -200%, -200%, -200%, -200%;*/
-
-
     -fx-background-color: radial-gradient(center 50% 50%, radius 80%, #D3686A 40%, #BA0B0D, #93090A00);
+}
+
+.menu-bar{
     -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
-    /*-fx-background-radius: 13% ;*/
+}
+.menu-item{
+    -fx-effect: dropshadow(gaussian, black, 5.0, 0.5, 0.0, 0.0);
 }
 
 .menu-bar .label{
@@ -122,6 +121,7 @@ Indian Red #D3686A
 }
 .context-menu{
     -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, black, 10.0, 0.5, 0.0, 0.0);
 }
 
 .menu-bar .label:hover,
@@ -155,17 +155,16 @@ Indian Red #D3686A
 #instructionsMenu .menu-item{
 
     -fx-border-style: solid;
-    -fx-border-color: linear-gradient(to bottom, midnightblue, black);
-    -fx-border-radius: 100%;
-    -fx-border-width: 300%;
-    -fx-border-insets: -200%, -200%, -200%, -200%;
-
-
     -fx-background-color: radial-gradient(center 50% 50%, radius 80%, lightskyblue 40%, royalblue, darkblue);
-    -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
-    -fx-background-radius: 13% ;
 }
+#instructionsMenu .menu-bar{
 
+    -fx-effect: dropshadow(gaussian, black, 30.0, 0.5, 0.0, 0.0);
+}
+#instructionsMenu .menu-item{
+
+    -fx-effect: dropshadow(gaussian, black, 5.0, 0.5, 0.0, 0.0);
+}
 #instructionsMenu .menu-bar .label{
 
     -fx-font-weight: bold;

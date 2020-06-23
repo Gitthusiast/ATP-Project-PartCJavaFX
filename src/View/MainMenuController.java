@@ -1,7 +1,5 @@
 package View;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -29,7 +26,7 @@ public class MainMenuController extends AView implements Initializable {
     private Scene playViewScene;
     private Scene chooseCharacterScene;
 
-    private PlayViewController playViewController;
+    private View view;
     private chooseCharacterController chooseCharacterController;
 
     public MainMenuController() { }
@@ -79,47 +76,16 @@ public class MainMenuController extends AView implements Initializable {
             if (playViewScene == null){
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                Parent root = fxmlLoader.load(getClass().getResource("PlayView.fxml").openStream());
-                playViewController = fxmlLoader.getController();
+                Parent root = fxmlLoader.load(getClass().getResource("MyView.fxml").openStream());
+                view = fxmlLoader.getController();
                 playViewScene = new Scene(root, mainMenuScene.getWidth(), mainMenuScene.getHeight());
-
-                playViewScene.widthProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                        playViewController.displayMaze();
-                    }
-                });
-
-                playViewScene.heightProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        playViewController.displayMaze();
-                    }
-                });
-
-                primaryStage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        playViewController.displayMaze();
-                        System.out.println("icon: " + newValue);
-                    }
-                });
-
-                primaryStage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        playViewController.displayMaze();
-                        System.out.println("maximaized: " + newValue);
-                    }
-                });
 
             }
 
-            playViewController.setMainMenuScene(mainMenuScene);
-            viewModel.addObserver(playViewController);
+            view.setMainMenuScene(mainMenuScene);
+            viewModel.addObserver(view);
 
-            playViewController.displayMaze();
+            view.displayMaze();
 
             stage.setScene(playViewScene);
             stage.show();

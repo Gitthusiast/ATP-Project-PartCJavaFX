@@ -6,6 +6,8 @@ import IO.MyDecompressorInputStream;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,7 +30,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class PlayViewController extends AView implements Observer, Initializable {
+public class View extends AView implements Observer, Initializable, IView {
 
     private Scene mainMenuScene;
     private ArrayList<int[]> solutionList = null;
@@ -39,8 +41,8 @@ public class PlayViewController extends AView implements Observer, Initializable
     private Image solutionPathImage;
     private Image backgroundImage;
 
-    private double oldX;
-    private double oldY;
+    private static double oldX;
+    private static double oldY;
     private DoubleProperty mazeDisplayCellWidth;
     private DoubleProperty mazeDisplayCellHeight;
 
@@ -63,7 +65,7 @@ public class PlayViewController extends AView implements Observer, Initializable
     @FXML
     private ZoomPane mazeScrollPane;
 
-    public PlayViewController() {
+    public View() {
 
         fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("MAZE file (*.maze)", "*.maze");
@@ -107,6 +109,26 @@ public class PlayViewController extends AView implements Observer, Initializable
 
         mazeDisplayControl.widthProperty().bind(mazeScrollPane.widthProperty());
         mazeDisplayControl.heightProperty().bind(mazeScrollPane.heightProperty());
+
+        mazeScrollPane.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                displayMaze();
+                oldY = viewModel.getCharacterRow() * mazeDisplayCellHeight.get();
+                oldX = viewModel.getCharacterColumn() * mazeDisplayCellWidth.get();
+            }
+        });
+
+        mazeScrollPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                displayMaze();
+                oldY = viewModel.getCharacterRow() * mazeDisplayCellHeight.get();
+                oldX = viewModel.getCharacterColumn() * mazeDisplayCellWidth.get();
+            }
+        });
 
     }
 
@@ -244,7 +266,7 @@ public class PlayViewController extends AView implements Observer, Initializable
     }
 
     /**
-     * Generates and display the maze instance in the view.
+     * Generates the maze instance in the view.
      */
     public void generateMaze(ActionEvent actionEvent){
 
