@@ -9,10 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,14 +30,12 @@ public class chooseCharacterController extends AView implements Initializable {
     Image chosenImage;
     @FXML
     private Button mainMenuReturnButton;
-    @FXML
-    private HBox imageBox;
 
     public chooseCharacterController() throws FileNotFoundException {
 
         images = new ArrayList<>();
 
-        images.add(new Image("Images/CovidAvatars/blueCovid.png"));
+        images.add(new Image(new FileInputStream("./src/resources/Images/CovidAvatars/blueCovid.png")));
         images.add(new Image("Images/CovidAvatars/classicCovid.png"));
         images.add(new Image("Images/CovidAvatars/complexVirus.png"));
         images.add(new Image("Images/CovidAvatars/Influenza_Virus.png"));

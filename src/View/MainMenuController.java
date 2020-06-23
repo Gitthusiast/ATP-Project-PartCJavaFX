@@ -98,6 +98,22 @@ public class MainMenuController extends AView implements Initializable {
                     }
                 });
 
+                primaryStage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        playViewController.displayMaze();
+                        System.out.println("icon: " + newValue);
+                    }
+                });
+
+                primaryStage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                        playViewController.displayMaze();
+                        System.out.println("maximaized: " + newValue);
+                    }
+                });
+
             }
 
             playViewController.setMainMenuScene(mainMenuScene);

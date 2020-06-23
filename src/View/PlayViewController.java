@@ -61,7 +61,7 @@ public class PlayViewController extends AView implements Observer, Initializable
     @FXML
     private Label label_currentPosition;
     @FXML
-    private ZoomableScrollPane mazeScrollPane;
+    private ZoomPane mazeScrollPane;
 
     public PlayViewController() {
 
@@ -103,17 +103,10 @@ public class PlayViewController extends AView implements Observer, Initializable
         mazeDisplayControl.setBackgroundPathColor(Color.web("#DE929100"));
         mazeDisplayControl.setBackgroundWallColor(Color.web("#DE929100"));
 
-        mazeScrollPane.initPane(mazeDisplayControl);
+        mazeScrollPane.setScalingTarget(mazeDisplayControl);
 
         mazeDisplayControl.widthProperty().bind(mazeScrollPane.widthProperty());
         mazeDisplayControl.heightProperty().bind(mazeScrollPane.heightProperty());
-
-    }
-
-
-    private void setZoomScaling(){
-
-
 
     }
 
